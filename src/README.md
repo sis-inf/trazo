@@ -28,9 +28,9 @@ Métodos para resolver ecuaciones no lineales.
 
 Ejemplos:
 
-* Bisección
-* Newton-Raphson
-* Secante
+- Bisección
+- Newton-Raphson
+- Secante
 
 ---
 
@@ -40,10 +40,10 @@ Métodos para resolver sistemas de ecuaciones lineales.
 
 Ejemplos:
 
-* Gauss
-* Gauss-Jordan
-* Jacobi
-* Gauss-Seidel
+- Gauss
+- Gauss-Jordan
+- Jacobi
+- Gauss-Seidel
 
 ---
 
@@ -53,9 +53,9 @@ Métodos de integración numérica.
 
 Ejemplos:
 
-* Regla del trapecio
-* Simpson
-* Simpson 3/8
+- Regla del trapecio
+- Simpson
+- Simpson 3/8
 
 ---
 
@@ -65,8 +65,8 @@ Métodos de interpolación de datos.
 
 Ejemplos:
 
-* Lagrange
-* Interpolación de Newton
+- Lagrange
+- Interpolación de Newton
 
 ---
 
@@ -76,8 +76,8 @@ Métodos para resolver ecuaciones diferenciales ordinarias.
 
 Ejemplos:
 
-* Euler
-* Runge-Kutta
+- Euler
+- Runge-Kutta
 
 ---
 
@@ -87,9 +87,9 @@ Funciones auxiliares reutilizables.
 
 Ejemplos:
 
-* Operaciones matemáticas
-* Manejo de matrices
-* Funciones de apoyo
+- Operaciones matemáticas
+- Manejo de matrices
+- Funciones de apoyo
 
 ---
 
@@ -101,8 +101,8 @@ Componentes base e interfaces comunes para los métodos.
 
 ## 🧩 Principios de Diseño
 
-* **Modularidad**: Cada método numérico se implementa como un módulo independiente, con una única responsabilidad bien definida.
-* **Extensibilidad**: Es posible incorporar nuevos métodos o categorías sin modificar la estructura existente, manteniendo una organización coherente por tipo de problema.
-* **Escalabilidad**: La estructura del proyecto permite crecer de forma ordenada conforme se añaden nuevos algoritmos o funcionalidades.
-* **Separación de responsabilidades**: La lógica de cálculo, utilidades y organización por categorías se mantiene desacoplada para facilitar el mantenimiento.
-* **Simplicidad**: Se prioriza un diseño claro y comprensible, orientado a facilitar el aprendizaje y la reutilización del código.
+- **Modularidad**: Cada método numérico se implementa como un módulo independiente, con una única responsabilidad bien definida.
+- **Extensibilidad**: Es posible incorporar nuevos métodos o categorías sin modificar la estructura existente, manteniendo una organización coherente por tipo de problema.
+- **Escalabilidad**: La estructura del proyecto permite crecer de forma ordenada conforme se añaden nuevos algoritmos o funcionalidades.
+- **Separación de responsabilidades**: La lógica de cálculo, utilidades y organización por categorías se mantiene desacoplada para facilitar el mantenimiento.
+- **Simplicidad**: Se prioriza un diseño claro y comprensible, orientado a facilitar el aprendizaje y la reutilización del código.
