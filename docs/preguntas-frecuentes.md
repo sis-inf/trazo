@@ -25,3 +25,7 @@ Puedes reportar errores abriendo un issue en el repositorio oficial de GitHub (h
 ## ¿Trazo es compatible con React, Vue o Angular?
 
 Sí, Trazo es agnóstico del framework. Puedes usarlo con React, Vue, Angular o vanilla JS. Solo necesitas una referencia al elemento DOM donde se capturará el trazo y llamar a los métodos de la librería dentro de los ciclos de vida apropiados.
+
+## ¿Dónde puedo encontrar ejemplos de uso?
+
+Visita la carpeta `examples/` en el repositorio oficial.
