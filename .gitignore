@@ -52,6 +52,7 @@ target/
 coverage/
 .coverage
 htmlcov/
+.nyc_output/
 
 # Datos sensibles
 *.pem
