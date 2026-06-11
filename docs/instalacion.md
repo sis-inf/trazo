@@ -65,7 +65,7 @@ npm install --save-dev
 
 ## Uso de la librería en un proyecto
 
-Puede importar las funciones de la librería desde la carpeta `src`.
+Puede importar las funciones de la libreria desde la carpeta `src`.
 
 Ejemplo:
 
