@@ -70,7 +70,7 @@ Puede importar las funciones de la librería desde la carpeta `src`.
 Ejemplo:
 
 ```javascript
-import { simpson } from "./src/integration/simpson.js";
+import { simpson13 } from "./src/index.js";
 ```
 
 ---
@@ -78,7 +78,7 @@ import { simpson } from "./src/integration/simpson.js";
 ## Ejemplo mínimo de uso
 
 ```javascript
-import { simpson } from "./src/integration/simpson.js";
+import { simpson13 } from "./src/index.js";
 
 function f(x) {
     return x * x;
