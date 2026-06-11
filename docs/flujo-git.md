@@ -60,5 +60,5 @@ Al crear nuevos métodos, asegúrate de colocarlos en los directorios correctos 
 - Métodos de sistemas de ecuaciones lineales:
    src/lineales/metodo.js
 
->  ***Importante:*** No utilizar rutas antiguas como src/root/, src/integration/ o src/linearAlgebra/.
+>  ***Importante:*** No utilizar rutas antiguas como src/root/, src/integration/, src/linearAlgebra/, etc.
 ---
