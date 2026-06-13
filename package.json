@@ -8,12 +8,18 @@
   "scripts": {
     "start": "node src/index.js",
     "build": "rollup -c",
-    "test": "jest --config=\"{\\\"testMatch\\\":[\\\"**/*.test.js\\\"]}\"",
-    "test:watch": "jest --watch tests",
-    "test:cov": "jest --coverage",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.cjs",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch tests",
+    "test:cov": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "lint": "eslint src tests",
     "format": "prettier --write src tests",
     "typecheck": "tsc -p jsconfig.json --noEmit"
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "node",
+    "testMatch": ["**/*.test.js"],
+    "moduleFileExtensions": ["js", "mjs"]
   },
   "devDependencies": {
     "eslint": "^8.57.1",

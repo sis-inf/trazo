@@ -34,6 +34,7 @@ describe('Método de Gauss', () => {
     const b = [5, 3];
     const result = gauss({ A, b });
     expect(result.resultado.length).toBe(2);
+    expect(Array.isArray(result.resultado)).toBe(true);
   });
 });
 
@@ -67,5 +68,6 @@ describe('Método de Gauss-Jordan', () => {
     const b = [5, 3];
     const result = gaussJordan({ A, b });
     expect(result.resultado.length).toBe(2);
+    expect(Array.isArray(result.resultado)).toBe(true);
   });
 });
