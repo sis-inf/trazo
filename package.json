@@ -1,24 +1,25 @@
 {
   "name": "trazo",
-  "version": "0.1.0",
-  "description": "Proyecto Trazo",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "Librería de métodos numéricos para matemáticas e ingeniería",
   "main": "src/index.js",
-  "license": "MIT",
-  "scripts": {
-    "start": "node src/index.js",
-    "build": "rollup -c",
-    "test": "jest --config=\"{\\\"testMatch\\\":[\\\"**/*.test.js\\\"]}\"",
-    "test:watch": "jest --watch tests",
-    "test:cov": "jest --coverage",
-    "lint": "eslint src tests",
-    "format": "prettier --write src tests",
-    "typecheck": "tsc -p jsconfig.json --noEmit"
+  "type": "module",
+  "keywords": [
+    "numerical-methods",
+    "mathematics",
+    "engineering"
+  ],
+  "homepage": "https://github.com/edsonhuanaco-commits/trazo#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edsonhuanaco-commits/trazo.git"
   },
-  "devDependencies": {
-    "eslint": "^8.57.1",
-    "jest": "^29.7.0",
-    "prettier": "^3.8.3",
-    "rollup": "^4.0.0"
+  "bugs": {
+    "url": "https://github.com/edsonhuanaco-commits/trazo/issues"
+  },
+  "author": "Edson Huanaco",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
   }
 }
