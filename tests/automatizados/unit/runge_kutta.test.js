@@ -57,4 +57,3 @@ describe('Métodos EDO', () => {
         expect(() => euler('not a function', 0, 1, 0.1, 10)).toThrow();
     });
 });
-

@@ -48,3 +48,4 @@ describe('validarTolerancia', () => {
         expect(() => validarTolerancia(NaN)).toThrow();
     });
 });
+
