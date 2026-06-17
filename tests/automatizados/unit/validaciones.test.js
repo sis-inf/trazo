@@ -1,47 +1,50 @@
-const {
-  validarNumero,
-  validarFuncion,
-  validarTolerancia,
-} = require("../../../../src/utils/validaciones");
+import {
+    validarNumero,
+    validarFuncion,
+    validarTolerancia
+} from '../../../src/utils/validaciones.js';
 
-describe("validarNumero", () => {
-  test("acepta un número válido", () => {
-    expect(() => validarNumero(10, "x")).not.toThrow();
-  });
+describe('validarNumero', () => {
+    test('acepta un número válido', () => {
+        expect(() => validarNumero(5)).not.toThrow();
+        expect(() => validarNumero(3.14)).not.toThrow();
+        expect(() => validarNumero(-2)).not.toThrow();
+    });
 
-  test("acepta un número decimal válido", () => {
-    expect(() => validarNumero(3.14, "x")).not.toThrow();
-  });
-
-  test("lanza error con texto", () => {
-    expect(() => validarNumero("hola", "x")).toThrow();
-  });
+    test('rechaza valores no numéricos', () => {
+        expect(() => validarNumero('5')).toThrow();
+        expect(() => validarNumero(null)).toThrow();
+        expect(() => validarNumero(undefined)).toThrow();
+        expect(() => validarNumero(NaN)).toThrow();
+    });
 });
 
-describe("validarFuncion", () => {
-  test("acepta una función válida", () => {
-    expect(() => validarFuncion(() => 5, "f")).not.toThrow();
-  });
+describe('validarFuncion', () => {
+    test('acepta una función', () => {
+        expect(() => validarFuncion(() => {})).not.toThrow();
+        expect(() => validarFuncion(function() {})).not.toThrow();
+        expect(() => validarFuncion(x => x * 2)).not.toThrow();
+    });
 
-  test("lanza error cuando no es función", () => {
-    expect(() => validarFuncion(10, "f")).toThrow();
-  });
-
-  test("lanza error con null", () => {
-    expect(() => validarFuncion(null, "f")).toThrow();
-  });
+    test('rechaza valores que no son funciones', () => {
+        expect(() => validarFuncion(5)).toThrow();
+        expect(() => validarFuncion('function')).toThrow();
+        expect(() => validarFuncion(null)).toThrow();
+        expect(() => validarFuncion({})).toThrow();
+    });
 });
 
-describe("validarTolerancia", () => {
-  test("acepta tolerancia positiva", () => {
-    expect(() => validarTolerancia(0.001)).not.toThrow();
-  });
+describe('validarTolerancia', () => {
+    test('acepta tolerancias válidas', () => {
+        expect(() => validarTolerancia(1e-6)).not.toThrow();
+        expect(() => validarTolerancia(1e-10)).not.toThrow();
+        expect(() => validarTolerancia(0.01)).not.toThrow();
+    });
 
-  test("lanza error con cero", () => {
-    expect(() => validarTolerancia(0)).toThrow();
-  });
-
-  test("lanza error con número negativo", () => {
-    expect(() => validarTolerancia(-1)).toThrow();
-  });
+    test('rechaza tolerancias inválidas', () => {
+        expect(() => validarTolerancia(0)).toThrow();
+        expect(() => validarTolerancia(-1)).toThrow();
+        expect(() => validarTolerancia('1e-6')).toThrow();
+        expect(() => validarTolerancia(NaN)).toThrow();
+    });
 });
