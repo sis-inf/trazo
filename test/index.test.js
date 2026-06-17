@@ -3,35 +3,20 @@
  */
 
 describe('Pruebas de integración', () => {
-    test('debería importar error_relativo.js correctamente', async () => {
-        const module = await import('../src/utils/error_relativo.js');
+    test('debería importar diferencia_hacia_atras.js correctamente', async () => {
+        const module = await import('../src/diferencias/diferencia_hacia_atras.js');
         expect(module).toBeDefined();
-        expect(typeof module.errorAbsoluto).toBe('function');
-        expect(typeof module.errorRelativo).toBe('function');
-        expect(typeof module.errorPorcentual).toBe('function');
-        expect(typeof module.errorRelativoAproximado).toBe('function');
+        expect(typeof module.diferenciasAtrasGrado1).toBe('function');
     });
 
-    test('errorAbsoluto(3.14159, 3.14) debería ser ~0.00159', async () => {
-        const { errorAbsoluto } = await import('../src/utils/error_relativo.js');
-        const result = errorAbsoluto(3.14159, 3.14);
-        expect(result).toBeCloseTo(0.00159, 4);
+    test('diferenciasAtrasGrado1(x => x**2, 2, 0.001) debería ser ~4.0', async () => {
+        const { diferenciasAtrasGrado1 } = await import('../src/diferencias/diferencia_hacia_atras.js');
+        const result = diferenciasAtrasGrado1(x => x**2, 2, 0.001);
+        expect(result).toBeCloseTo(4.0, 2);
     });
 
-    test('errorRelativo(1, 0.9) debería ser 0.1', async () => {
-        const { errorRelativo } = await import('../src/utils/error_relativo.js');
-        const result = errorRelativo(1, 0.9);
-        expect(result).toBeCloseTo(0.1, 4);
-    });
-
-    test('errorPorcentual(100, 95) debería ser 5', async () => {
-        const { errorPorcentual } = await import('../src/utils/error_relativo.js');
-        const result = errorPorcentual(100, 95);
-        expect(result).toBe(5);
-    });
-
-    test('errorRelativo(0, 5) debería lanzar error', async () => {
-        const { errorRelativo } = await import('../src/utils/error_relativo.js');
-        expect(() => errorRelativo(0, 5)).toThrow('El valor verdadero no puede ser 0');
+    test('diferenciasAtrasGrado1 con h=0 debería lanzar error', async () => {
+        const { diferenciasAtrasGrado1 } = await import('../src/diferencias/diferencia_hacia_atras.js');
+        expect(() => diferenciasAtrasGrado1(x => x**2, 2, 0)).toThrow('El paso h no puede ser 0');
     });
 });
