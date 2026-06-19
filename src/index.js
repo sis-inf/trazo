@@ -12,6 +12,7 @@ import { metodHeun, metodoPuntoMedio } from './edo/runge_kutta_2.js';
 import { rungeKutta4 } from './edo/runge_kutta_4.js';
 
 import { derivative } from './integracion/derivative.js';
+import { gaussLegendre } from './integracion/gauss_legendre.js';
 import { simpson13 } from './integracion/simpson-13.js';
 import { simpson38 } from './integracion/simpson-38.js';
 import { simpsonCompuesto } from './integracion/simpson_compuesto.js';
@@ -20,9 +21,13 @@ import { trapecio } from './integracion/trapecio.js';
 import { lagrange } from './interpolacion/lagrange.js';
 import { linearInterpolation } from './interpolacion/linear.js';
 import { newtonDD } from './interpolacion/newton-dd.js';
+import { newtonDiferenciasDivididas } from './interpolacion/newton_diferencias.js';
 import { polyEval } from './interpolacion/polyEval.js';
 import { splines } from './interpolacion/splines.js';
 import { splineCubicoNatural } from './interpolacion/spline_cubico.js';
+
+import { exportarCSV } from './io/exportar_csv.js';
+import { exportarJSON } from './io/exportar_json.js';
 
 import { descomposicionCholesky, resolverCholesky } from './lineales/cholesky.js';
 import { det2x2, det3x3 } from './lineales/determinant.js';
@@ -48,6 +53,8 @@ import { secante } from './no-lineales/secante.js';
 
 import { evaluarHorner } from './polinomios/horner.js';
 
+import { errorRelativo } from './utils/error_relativo.js';
+
 const lineales = {
   gauss,
   gaussJordan,
@@ -72,6 +79,7 @@ const noLineales = {
 const interpolacion = {
   lagrange,
   newtonDD,
+  newtonDiferenciasDivididas,
   splines,
   linearInterpolation,
   polyEval,
@@ -83,7 +91,8 @@ const integracion = {
   simpson13,
   simpson38,
   derivative,
-  simpsonCompuesto
+  simpsonCompuesto,
+  gaussLegendre
 };
 
 const edo = {
@@ -116,6 +125,15 @@ const polinomios = {
   evaluarHorner
 };
 
+const utils = {
+  errorRelativo
+};
+
+const io = {
+  exportarCSV,
+  exportarJSON
+};
+
 export {
   lineales,
   noLineales,
@@ -126,6 +144,8 @@ export {
   diferencias,
   matricial,
   polinomios,
+  utils,
+  io,
 
   // lineales
   gauss,
@@ -149,6 +169,7 @@ export {
   // interpolacion
   lagrange,
   newtonDD,
+  newtonDiferenciasDivididas,
   splines,
   linearInterpolation,
   polyEval,
@@ -160,6 +181,7 @@ export {
   simpson38,
   derivative,
   simpsonCompuesto,
+  gaussLegendre,
 
   // edo
   euler,
@@ -184,7 +206,14 @@ export {
   normaFrobenius,
 
   // polinomios
-  evaluarHorner
+  evaluarHorner,
+
+  // utils
+  errorRelativo,
+
+  // io
+  exportarCSV,
+  exportarJSON
 };
 
 export default {
@@ -197,6 +226,8 @@ export default {
   diferencias,
   matricial,
   polinomios,
+  utils,
+  io,
 
   // exportaciones planas para acceso directo
   ...lineales,
@@ -207,5 +238,7 @@ export default {
   ...analisis,
   ...diferencias,
   ...matricial,
-  ...polinomios
+  ...polinomios,
+  ...utils,
+  ...io
 };
