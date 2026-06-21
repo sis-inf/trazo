@@ -1,0 +1,7 @@
+src/no-lineales/   = core-team
+src/lineales/      = core-team
+src/integracion/   = core-team
+src/interpolacion/ = core-team
+src/edo/           = core-team
+docs/              = docs-team
+*                  = admin
