@@ -1,0 +1,9 @@
+* = @all
+
+src/no-lineales/ = @user1
+src/lineales/ = @user2
+src/integracion/ = @user3
+src/interpolacion/ = @user4
+src/edo/ = @user5
+
+docs/ = @user6
