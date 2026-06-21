@@ -1,0 +1,7 @@
+src/no-lineales/   = user1, user2
+src/lineales/      = user3, user4
+src/integracion/   = user5, user6
+src/interpolacion/ = user7, user8
+src/edo/           = user9, user10
+docs/              = user11, user12
+*                  = admin
