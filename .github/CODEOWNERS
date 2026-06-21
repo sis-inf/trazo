@@ -1,0 +1,7 @@
+src/no-lineales/   = luciano
+src/lineales/      = carlos
+src/integracion/   = ana
+src/interpolacion/ = miguel
+src/edo/           = sol
+docs/              = @all
+*                 = @all
