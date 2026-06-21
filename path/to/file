@@ -1,0 +1,7 @@
+* src/no-lineales/ = @no-lineales-reviewer
+* src/lineales/ = @lineales-reviewer
+* src/integracion/ = @integracion-reviewer
+* src/interpolacion/ = @interpolacion-reviewer
+* src/edo/ = @edo-reviewer
+* docs/ = @docs-reviewer
+** = @admin-fallback
