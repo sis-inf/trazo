@@ -1,0 +1,9 @@
+* = @all
+
+src/no-lineales/ = @jose-luis-fernandez
+src/lineales/ = @maria-garcia
+src/integracion/ = @juan-pablo-lopez
+src/interpolacion/ = @ana-maria-sanchez
+src/edo/ = @carlos-martinez
+
+docs/ = @equipo-documentacion
