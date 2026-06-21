@@ -1,0 +1,7 @@
+src/no-lineales/   = assignee1, assignee2
+src/lineales/      = assignee3, assignee4
+src/integracion/   = assignee5, assignee6
+src/interpolacion/ = assignee7, assignee8
+src/edo/           = assignee9, assignee10
+docs/              = assignee11, assignee12
+*                  = admin-user
