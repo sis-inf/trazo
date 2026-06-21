@@ -1,0 +1,8 @@
+* = @all
+
+src/no-lineales/ = @jose
+src/lineales/ = @maria
+src/integracion/ = @luis
+src/interpolacion/ = @ana
+src/edo/ = @carlos
+docs/ = @equipo-documentacion
