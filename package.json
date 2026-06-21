@@ -18,7 +18,8 @@
     "test:watch": "jest --watch tests",
     "test:cov": "jest --coverage",
     "lint": "eslint src tests",
-    "format": "prettier --write src tests",
+    "format": "prettier --write src/**/*.js tests/**/*.js",
+    "format:check": "prettier --check src/**/*.js",
     "typecheck": "tsc -p jsconfig.json --noEmit"
   },
   "keywords": [
