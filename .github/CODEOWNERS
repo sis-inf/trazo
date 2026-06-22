@@ -1,0 +1,22 @@
+# CODEOWNERS - Assign reviewers by module
+
+# Linear equations methods
+src/lineales/ @erwinsaul
+
+# Non-linear equations methods
+src/no-lineales/ @erwinsaul
+
+# Integration methods
+src/integracion/ @erwinsaul
+
+# Interpolation methods
+src/interpolacion/ @erwinsaul
+
+# Ordinary differential equations
+src/edo/ @erwinsaul
+
+# Documentation
+docs/ @erwinsaul
+
+# Fallback - administrator
+* @erwinsaul
