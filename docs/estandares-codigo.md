@@ -192,3 +192,136 @@ if (product.isAvailable()) {
 - `===` → comparaciones estrictas
 - Consistencia > preferencias personales
 -Código → Inglés (obligatorio)
+
+## 🆕 10. Convenciones ES2020+
+
+Las siguientes características de ES2020 (ECMAScript 2020) deben usarse en el proyecto para escribir código más limpio y seguro.
+
+### 🔗 Encadenamiento opcional (`?.`)
+
+Usar optional chaining para acceder a propiedades anidadas de forma segura sin necesidad de verificar manualmente cada nivel.
+
+#### ✅ Recomendado:
+```js
+const userName = user?.profile?.name;
+const firstTag = post?.tags?.[0];
+const result = api?.getData?.();
+```
+
+#### ❌ Evitar:
+```js
+const userName = user && user.profile && user.profile.name;
+```
+
+### ❓ Coalescencia nula (`??`)
+
+Usar nullish coalescing para proporcionar valores por defecto solo cuando el valor es `null` o `undefined`, no para otros valores falsy (`0`, `''`, `false`).
+
+#### ✅ Recomendado:
+```js
+const pageSize = userPreference ?? 10;  // 0 es un valor válido aquí
+const username = input ?? 'Invitado';
+```
+
+#### ❌ Evitar:
+```js
+const pageSize = userPreference || 10;  // 0 sería reemplazado incorrectamente
+```
+
+### 🌐 `globalThis`
+
+Usar `globalThis` para acceder al objeto global de forma consistente en cualquier entorno (navegador, Node.js, Web Workers).
+
+#### ✅ Recomendado:
+```js
+// Acceso universal al objeto global
+const globalObj = globalThis;
+
+// Verificar disponibilidad de API
+if (typeof globalThis.fetch === 'function') {
+  // fetch está disponible
+}
+```
+
+### 📦 `Promise.allSettled()`
+
+Usar `Promise.allSettled()` cuando se necesita esperar a que todas las promesas se resuelvan o rechacen, sin que un rechazo detenga la ejecución.
+
+#### ✅ Recomendado:
+```js
+const results = await Promise.allSettled([
+  fetchUserData(),
+  fetchProducts(),
+  fetchAnalytics(),
+]);
+
+results.forEach((result) => {
+  if (result.status === 'fulfilled') {
+    console.log('Éxito:', result.value);
+  } else {
+    console.warn('Falló:', result.reason);
+  }
+});
+```
+
+#### ❌ Evitar:
+```js
+// Promise.all falla completamente si una promesa rechaza
+const results = await Promise.all([...]);
+```
+
+### 🔍 `String.prototype.matchAll()`
+
+Usar `matchAll()` para obtener todas las coincidencias de una expresión regular, incluyendo grupos de captura.
+
+#### ✅ Recomendado:
+```js
+const regex = /(\w+)=(\w+)/g;
+const params = [...str.matchAll(regex)];
+// Cada elemento incluye la coincidencia completa y los grupos
+```
+
+### 🏷️ `BigInt`
+
+Usar `BigInt` para trabajar con enteros mayores a `Number.MAX_SAFE_INTEGER` (2^53 - 1).
+
+#### ✅ Recomendado:
+```js
+// Sufijo n para literales BigInt
+const bigNumber = 9007199254740991n;
+
+// Operaciones con BigInt
+const sum = bigNumber + 1n;
+```
+
+> [!NOTE]
+> No se puede mezclar `BigInt` con `Number` en operaciones aritméticas. Usar conversión explícita cuando sea necesario.
+
+### 📥 `import()` dinámico
+
+Usar import dinámico para cargar módulos bajo demanda (code splitting) o de forma condicional.
+
+#### ✅ Recomendado:
+```js
+// Carga bajo demanda
+const module = await import('./heavy-module.js');
+module.processData(data);
+
+// Carga condicional
+if (featureEnabled) {
+  const { Feature } = await import('./feature.js');
+  Feature.init();
+}
+```
+
+### 📋 Resumen de convenciones ES2020+
+
+| Característica | Uso principal |
+|---|---|
+| `?.` | Acceso seguro a propiedades anidadas |
+| `??` | Valores por defecto para `null`/`undefined` |
+| `globalThis` | Acceso universal al objeto global |
+| `Promise.allSettled()` | Esperar todas las promesas sin fallar |
+| `matchAll()` | Obtener todas las coincidencias regex con grupos |
+| `BigInt` | Enteros de precisión arbitraria |
+| `import()` | Carga dinámica de módulos |
