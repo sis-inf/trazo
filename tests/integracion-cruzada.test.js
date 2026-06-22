@@ -7,26 +7,21 @@
  */
 
 import {
-    // Raíces no lineales
     biseccion,
     falsaPosicion,
     newtonRaphson,
     secante,
     puntoFijo,
-    // Sistemas lineales
     gauss,
     gaussJordan,
     lu,
     jacobi,
     gaussSeidel,
-    // Interpolación
     lagrange,
     newtonDD,
-    // Integración
     trapecio,
     simpson13,
     simpson38,
-    // EDO
     euler,
     eulerMejorado,
     rungeKutta4
@@ -41,50 +36,49 @@ describe('Pruebas de integración cruzada', () => {
         test('todos los métodos convergen a sqrt(2) para f(x) = x² - 2', () => {
             const f = x => x * x - 2;
             const tolerancia = 1e-4;
-            const x0 = 1;
-            const x1 = 2;
             const esperado = Math.sqrt(2);
             
             const resultados = [];
             
-            // Bisección
+            // Bisección: { f, a, b, tolerancia, maxIter }
             try {
-                const res = biseccion(f, x0, x1, tolerancia);
-                if (typeof res === 'number') {
-                    resultados.push({ metodo: 'biseccion', valor: res });
+                const res = biseccion({ f, a: 1, b: 2, tolerancia });
+                if (res && res.resultado !== undefined) {
+                    resultados.push({ metodo: 'biseccion', valor: res.resultado });
                 }
             } catch (e) {}
             
-            // Falsa posición
+            // Falsa posición: { f, a, b, tolerancia, maxIter }
             try {
-                const res = falsaPosicion(f, x0, x1, tolerancia);
-                if (typeof res === 'number') {
-                    resultados.push({ metodo: 'falsaPosicion', valor: res });
+                const res = falsaPosicion({ f, a: 1, b: 2, tolerancia });
+                if (res && res.resultado !== undefined) {
+                    resultados.push({ metodo: 'falsaPosicion', valor: res.resultado });
                 }
             } catch (e) {}
             
-            // Newton-Raphson
+            // Newton-Raphson: { f, df, x0, tolerancia, maxIter }
             try {
-                const res = newtonRaphson(f, x0, tolerancia);
-                if (typeof res === 'number') {
-                    resultados.push({ metodo: 'newtonRaphson', valor: res });
+                const df = x => 2 * x;
+                const res = newtonRaphson({ f, df, x0: 1.5, tolerancia });
+                if (res && res.resultado !== undefined) {
+                    resultados.push({ metodo: 'newtonRaphson', valor: res.resultado });
                 }
             } catch (e) {}
             
-            // Secante
+            // Secante: { f, x0, x1, tolerancia, maxIter }
             try {
-                const res = secante(f, x0, x1, tolerancia);
-                if (typeof res === 'number') {
-                    resultados.push({ metodo: 'secante', valor: res });
+                const res = secante({ f, x0: 1, x1: 2, tolerancia });
+                if (res && res.resultado !== undefined) {
+                    resultados.push({ metodo: 'secante', valor: res.resultado });
                 }
             } catch (e) {}
             
-            // Punto fijo
+            // Punto fijo: { g, x0, tolerancia, maxIter }
             try {
-                const g = x => x - (x * x - 2) / x;
-                const res = puntoFijo(g, 1.5, tolerancia);
-                if (typeof res === 'number') {
-                    resultados.push({ metodo: 'puntoFijo', valor: res });
+                const g = x => (x * x + 2) / (2 * x);
+                const res = puntoFijo({ g, x0: 1.5, tolerancia });
+                if (res && res.resultado !== undefined) {
+                    resultados.push({ metodo: 'puntoFijo', valor: res.resultado });
                 }
             } catch (e) {}
             
@@ -101,54 +95,59 @@ describe('Pruebas de integración cruzada', () => {
     // ============================================================
     describe('Sistemas lineales', () => {
         test('todos los métodos resuelven el sistema 3x3 correctamente', () => {
+            // Sistema diagonalmente dominante:
+            // 4x + y - z = 4
+            // 2x + 5y + z = 8
+            // x - y + 3z = 3
+            // Solución: x = 1, y = 1, z = 1
             const A = [
-                [2, 1, -1],
-                [-3, -1, 2],
-                [-2, 1, 2]
+                [4, 1, -1],
+                [2, 5, 1],
+                [1, -1, 3]
             ];
-            const b = [8, -11, -3];
-            const solucionEsperada = [2, 3, -1];
+            const b = [4, 8, 3];
+            const solucionEsperada = [1, 1, 1];
             const tolerancia = 1e-4;
             
             const resultados = [];
             
-            // Gauss
+            // Gauss: { A, b }
             try {
-                const res = gauss(A, b);
-                if (Array.isArray(res)) {
-                    resultados.push({ metodo: 'gauss', valor: res });
+                const res = gauss({ A, b });
+                if (res && res.resultado !== undefined && Array.isArray(res.resultado)) {
+                    resultados.push({ metodo: 'gauss', valor: res.resultado });
                 }
             } catch (e) {}
             
-            // Gauss-Jordan
+            // Gauss-Jordan: { A, b }
             try {
-                const res = gaussJordan(A, b);
-                if (Array.isArray(res)) {
-                    resultados.push({ metodo: 'gaussJordan', valor: res });
+                const res = gaussJordan({ A, b });
+                if (res && res.resultado !== undefined && Array.isArray(res.resultado)) {
+                    resultados.push({ metodo: 'gaussJordan', valor: res.resultado });
                 }
             } catch (e) {}
             
-            // LU
+            // LU: { A, b } → devuelve resultado.x
             try {
-                const res = lu(A, b);
-                if (Array.isArray(res)) {
-                    resultados.push({ metodo: 'lu', valor: res });
+                const res = lu({ A, b });
+                if (res && res.resultado && res.resultado.x !== undefined && Array.isArray(res.resultado.x)) {
+                    resultados.push({ metodo: 'lu', valor: res.resultado.x });
                 }
             } catch (e) {}
             
-            // Jacobi
+            // Jacobi: { A, b, tolerancia, maxIter }
             try {
-                const res = jacobi(A, b, 1e-6, 1000);
-                if (Array.isArray(res)) {
-                    resultados.push({ metodo: 'jacobi', valor: res });
+                const res = jacobi({ A, b, tolerancia: 1e-6, maxIter: 100 });
+                if (res && res.resultado !== undefined && Array.isArray(res.resultado)) {
+                    resultados.push({ metodo: 'jacobi', valor: res.resultado });
                 }
             } catch (e) {}
             
-            // Gauss-Seidel
+            // Gauss-Seidel: { A, b, tolerancia, maxIter }
             try {
-                const res = gaussSeidel(A, b, 1e-6, 1000);
-                if (Array.isArray(res)) {
-                    resultados.push({ metodo: 'gaussSeidel', valor: res });
+                const res = gaussSeidel({ A, b, tolerancia: 1e-6, maxIter: 100 });
+                if (res && res.resultado !== undefined && Array.isArray(res.resultado)) {
+                    resultados.push({ metodo: 'gaussSeidel', valor: res.resultado });
                 }
             } catch (e) {}
             
@@ -179,22 +178,37 @@ describe('Pruebas de integración cruzada', () => {
             let valorLagrange = null;
             let valorNewton = null;
             
+            // Lagrange: { puntos, x } → devuelve objeto con resultado
             try {
-                valorLagrange = lagrange(puntos, x);
+                const res = lagrange({ puntos, x });
+                if (res && res.resultado !== undefined) {
+                    valorLagrange = res.resultado;
+                }
             } catch (e) {}
             
+            // NewtonDD: { puntos, x } → devuelve objeto con resultado
             try {
-                valorNewton = newtonDD(puntos, x);
+                const res = newtonDD({ puntos, x });
+                if (res && res.resultado !== undefined) {
+                    valorNewton = res.resultado;
+                }
             } catch (e) {}
             
+            // Si ambos funcionan, deben dar el mismo valor
             if (valorLagrange !== null && valorNewton !== null) {
                 expect(Math.abs(valorLagrange - valorNewton)).toBeLessThan(1e-10);
-            } else if (valorLagrange !== null) {
+            } 
+            // Si solo Lagrange funciona
+            else if (valorLagrange !== null) {
                 expect(Math.abs(valorLagrange - esperado)).toBeLessThan(1e-6);
-            } else if (valorNewton !== null) {
+            } 
+            // Si solo NewtonDD funciona
+            else if (valorNewton !== null) {
                 expect(Math.abs(valorNewton - esperado)).toBeLessThan(1e-6);
-            } else {
-                expect(true).toBe(true);
+            } 
+            // Si ambos fallan, el test falla
+            else {
+                expect(true).toBe(false);
             }
         });
     });
@@ -212,24 +226,27 @@ describe('Pruebas de integración cruzada', () => {
             
             const resultados = [];
             
+            // Trapecio: { f, a, b, n }
             try {
-                const res = trapecio(f, a, b, 100);
-                if (typeof res === 'number') {
-                    resultados.push({ metodo: 'trapecio', valor: res });
+                const res = trapecio({ f, a, b, n: 100 });
+                if (res && res.resultado !== undefined) {
+                    resultados.push({ metodo: 'trapecio', valor: res.resultado });
                 }
             } catch (e) {}
             
+            // Simpson 13: { f, a, b, n }
             try {
-                const res = simpson13(f, a, b, 100);
-                if (typeof res === 'number') {
-                    resultados.push({ metodo: 'simpson13', valor: res });
+                const res = simpson13({ f, a, b, n: 100 });
+                if (res && res.resultado !== undefined) {
+                    resultados.push({ metodo: 'simpson13', valor: res.resultado });
                 }
             } catch (e) {}
             
+            // Simpson 38: { f, a, b, n }
             try {
-                const res = simpson38(f, a, b, 99);
-                if (typeof res === 'number') {
-                    resultados.push({ metodo: 'simpson38', valor: res });
+                const res = simpson38({ f, a, b, n: 99 });
+                if (res && res.resultado !== undefined) {
+                    resultados.push({ metodo: 'simpson38', valor: res.resultado });
                 }
             } catch (e) {}
             
@@ -256,25 +273,25 @@ describe('Pruebas de integración cruzada', () => {
             
             const resultados = [];
             
-            // Euler
+            // Euler: { f, x0, y0, h, xFinal }
             try {
-                const res = euler(f, x0, y0, h, xFinal);
+                const res = euler({ f, x0, y0, h, xFinal });
                 if (res && res.resultado && res.resultado.length > 0) {
                     const ultimo = res.resultado[res.resultado.length - 1];
                     resultados.push({ metodo: 'euler', valor: ultimo[1] });
                 }
             } catch (e) {}
             
-            // Euler Mejorado
+            // Euler Mejorado: { f, x0, y0, h, xFinal }
             try {
-                const res = eulerMejorado(f, x0, y0, h, xFinal);
+                const res = eulerMejorado({ f, x0, y0, h, xFinal });
                 if (res && res.resultado && res.resultado.length > 0) {
                     const ultimo = res.resultado[res.resultado.length - 1];
                     resultados.push({ metodo: 'eulerMejorado', valor: ultimo[1] });
                 }
             } catch (e) {}
             
-            // Runge-Kutta 4
+            // Runge-Kutta 4: { f, x0, y0, h, xFinal }
             try {
                 const res = rungeKutta4({ f, x0, y0, h, xFinal });
                 if (res && res.resultado && res.resultado.length > 0) {
@@ -302,4 +319,3 @@ describe('Pruebas de integración cruzada', () => {
         });
     });
 });
-
