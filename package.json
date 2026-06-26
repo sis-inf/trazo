@@ -1,17 +1,44 @@
 {
-  "name": "@sis-inf/trazo",
-  "version": "0.1.0",
-  "description": "Proyecto Trazo",
+  "name": "trazo",
+  "version": "1.0.0",
+  "description": "Numerical methods library for mathematics and engineering applications",
+  "main": "dist/trazo.cjs.js",
+  "module": "dist/trazo.esm.js",
   "type": "module",
-  "main": "src/index.js",
-  "license": "MIT",
+  "exports": {
+    ".": {
+      "require": "./dist/trazo.cjs.js",
+      "import": "./dist/trazo.esm.js"
+    }
+  },
   "scripts": {
     "start": "node src/index.js",
     "build": "rollup -c",
-    "test": "jest tests",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config=\"{\\\"testMatch\\\":[\\\"**/*.test.js\\\"],\\\"passWithNoTests\\\":true}\"",
     "test:watch": "jest --watch tests",
+    "test:cov": "jest --coverage",
     "lint": "eslint src tests",
-    "format": "prettier --write src tests"
+    "format": "prettier --write src/**/*.js tests/**/*.js",
+    "format:check": "prettier --check src/**/*.js",
+    "typecheck": "tsc -p jsconfig.json --noEmit"
+  },
+  "keywords": [
+    "numerical-methods",
+    "mathematics",
+    "engineering"
+  ],
+  "homepage": "https://github.com/sis-inf/trazo#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sis-inf/trazo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sis-inf/trazo/issues"
+  },
+  "author": "sis-inf",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
   },
   "devDependencies": {
     "eslint": "^8.57.1",
@@ -20,4 +47,3 @@
     "rollup": "^4.0.0"
   }
 }
-

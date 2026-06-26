@@ -15,10 +15,17 @@ Antes de utilizar la librería, asegúrese de tener instalado:
 - Git
 
 Verificar instalación:
+### Instalar Node.js con nvm (recomendado)
+
+Se recomienda utilizar nvm (Node Version Manager) para administrar versiones de Node.js.
 
 ```bash
-node -v
-npm -v
+nvm install 20
+nvm use 20
+
+```bash
+node --version
+npm --version
 git --version
 ```
 
@@ -37,7 +44,6 @@ Luego ingrese al proyecto:
 ```bash
 cd trazo
 ```
-
 ---
 
 ## Instalar dependencias
@@ -47,7 +53,14 @@ Instale las dependencias del proyecto:
 ```bash
 npm install
 ```
+---
+### Dependencias para contribuidores
 
+Para instalar herramientas de desarrollo adicionales:
+
+```bash
+npm install --save-dev
+```
 ---
 
 ## Uso de la librería en un proyecto

@@ -2,13 +2,12 @@
 
 ```bash
 src/
+├── analisis/
+├── diferencias/
+├── matricial/
+├── polinomios/
+├── io/
 ├── core/
-├── edo/
-├── integracion/
-├── interpolacion/
-├── lineales/
-├── no-lineales/
-└── utils/
 ```
 
 Este directorio contiene la implementación de distintos métodos numéricos organizados según la categoría del problema que resuelven.
@@ -16,28 +15,23 @@ Este directorio contiene la implementación de distintos métodos numéricos org
 
 ## Descripción de Directorios
 
-### `no-lineales/`
+### `analisis/`
 
-Métodos para resolver ecuaciones no lineales.
+Métodos de análisis numérico.
 
 Ejemplos:
 
-* Bisección
-* Newton-Raphson
-* Secante
+* Mínimos cuadrados
 
 ---
 
-### `lineales/`
+### `diferencias/`
 
-Métodos para resolver sistemas de ecuaciones lineales.
+Métodos de derivación numérica.
 
 Ejemplos:
 
-* Gauss
-* Gauss-Jordan
-* Jacobi
-
+* Diferencias finitas
 ---
 
 ### `integracion/`
@@ -52,36 +46,39 @@ Ejemplos:
 
 ---
 
-### `interpolacion/`
+### `matricial/`
 
-Métodos de interpolación de datos.
+Métodos para sistemas de ecuaciones lineales.
+
+Ejemplos:
+
+* Gauss
+* Gauss-Jordan
+* LU
+* Jacobi
+* Gauss-Seidel
+
+---
+
+### `polinomios/`
+
+Métodos de interpolación y aproximación.
 
 Ejemplos:
 
 * Lagrange
-* Interpolación de Newton
-
+* Newton
+* Splines cúbicos
 ---
 
-### `edo/`
+### `io/`
 
-Métodos para resolver ecuaciones diferenciales ordinarias.
+Manejo de entrada y salida de datos.
 
 Ejemplos:
 
-* Euler
-
----
-
-### `utils/`
-
-Funciones auxiliares reutilizables.
-
-Ejemplos:
-
-* Validaciones
-* Formateo
-* Convergencia
+* Formateo de resultados
+* Exportación de datos
 
 ---
 

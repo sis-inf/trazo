@@ -1,81 +1,98 @@
-// METODO DE LA SECANTE
+import { crearResultado } from "../core/contrato.js";
+import { ErrorDominio } from "../core/errores.js";
+import {
+  validarFuncion,
+  validarNumero,
+  validarTolerancia,
+  validarIteraciones,
+} from "../utils/validaciones.js";
 
-function secante({ f, x0, x1, tolerancia = 1e-6, maxIter = 100 }) {
- 
-  if (typeof f !== "function") {
-    throw new TypeError(
-      `Trazo.secante: 'f' debe ser una función. Se recibió: ${typeof f}`
-    );
-  }
- 
-  if (typeof x0 !== "number" || isNaN(x0)) {
-    throw new TypeError(
-      `Trazo.secante: 'x0' debe ser un número válido. Se recibió: ${x0}`
-    );
-  }
- 
-  if (typeof x1 !== "number" || isNaN(x1)) {
-    throw new TypeError(
-      `Trazo.secante: 'x1' debe ser un número válido. Se recibió: ${x1}`
-    );
-  }
- 
-  if (x0 === x1) {
-    throw new Error(
-      `Trazo.secante: 'x0' y 'x1' no pueden ser iguales (${x0}). ` +
-      `El método necesita dos puntos distintos como punto de partida.`
-    );
-  }
- 
-  if (typeof tolerancia !== "number" || tolerancia <= 0) {
-    throw new TypeError(
-      "Trazo.secante: 'tolerancia' debe ser un número positivo."
-    );
-  }
- 
-  if (typeof maxIter !== "number" || maxIter < 1 || !Number.isInteger(maxIter)) {
-    throw new TypeError(
-      "Trazo.secante: 'maxIter' debe ser un entero mayor a 0."
-    );
-  }
- 
-  let puntoAnterior  = x0;
-  let puntoActual    = x1;
-  const iteraciones  = [];
-  let convergio      = false;
- 
-  for (let iter = 0; iter < maxIter; iter++) {
-    const fAnterior = f(puntoAnterior);
-    const fActual   = f(puntoActual);
- 
-    const denominador = fActual - fAnterior;
- 
+/**
+ * Encuentra una raíz mediante el método de la secante.
+ *
+ * @param {Object} opciones
+ * @param {Function} opciones.f Función objetivo.
+ * @param {number} opciones.x0 Primera aproximación inicial.
+ * @param {number} opciones.x1 Segunda aproximación inicial.
+ * @param {number} [opciones.tolerancia=1e-6]
+ * @param {number} [opciones.maxIter=100]
+ * @returns {Object} Resultado siguiendo el contrato de Trazo.
+ */
+function secante({
+  f,
+  x0,
+  x1,
+  tolerancia = 1e-6,
+  maxIter = 100,
+}) {
+  validarFuncion(f, "f");
+  validarNumero(x0, "x0");
+  validarNumero(x1, "x1");
+  validarTolerancia(tolerancia);
+  validarIteraciones(maxIter);
+
+  let xPrev = x0;
+  let xActual = x1;
+
+  const iteraciones = [];
+  let convergio = false;
+
+  for (let n = 1; n <= maxIter; n++) {
+    const fxPrev = f(xPrev);
+    const fxActual = f(xActual);
+
+    const denominador = fxActual - fxPrev;
+
     if (denominador === 0) {
-      throw new Error(
-        `Trazo.secante: el denominador f(x1) - f(x0) es cero en la iteración ${iter + 1}. ` +
-        `f(x0) = f(${puntoAnterior}) = ${fAnterior}, f(x1) = f(${puntoActual}) = ${fActual}. ` +
-        `La secante es horizontal. Considera elegir puntos iniciales diferentes.`
+      throw new ErrorDominio(
+        `Trazo.secante: división por cero en la iteración ${n}.`
       );
     }
- 
-    const x2 = puntoActual - fActual * (puntoActual - puntoAnterior) / denominador;
-    iteraciones.push(x2);
- 
-    if (Math.abs(f(x2)) < tolerancia) {
+
+    const xNuevo =
+      xActual -
+      (fxActual * (xActual - xPrev)) / denominador;
+
+    const error = Math.abs(xNuevo - xActual);
+
+    iteraciones.push({
+      n,
+      xPrev,
+      xActual,
+      xNuevo,
+      fxPrev,
+      fxActual,
+      error,
+    });
+
+    if (error < tolerancia) {
       convergio = true;
-      puntoActual = x2;
+      xActual = xNuevo;
       break;
     }
- 
-    puntoAnterior = puntoActual;
-    puntoActual   = x2;
+
+    xPrev = xActual;
+    xActual = xNuevo;
   }
- 
-  return {
-    resultado: puntoActual,
+
+  return crearResultado({
+    resultado: xActual,
     iteraciones,
     convergio,
-  };
+    mensaje: convergio
+      ? "Método convergió correctamente."
+      : "Se alcanzó el máximo de iteraciones sin converger.",
+    meta: {
+      metodo: "secante",
+      parametros: {
+        x0,
+        x1,
+        tolerancia,
+        maxIter,
+      },
+      tiempo_ms: 0,
+    },
+  });
 }
- 
+
 export { secante };

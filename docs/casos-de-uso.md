@@ -160,3 +160,56 @@ const temperaturas = gaussSeidel(A, b, T0, 0.0001, 500);
 * Resultado: T ≈ [125.0, 150.0, 175.0] °C
 * Interpretación: distribución de temperatura en cada nodo de la barra
 
+### CU-EDO-01: Resolver una EDO de un circuito RC con RK4
+
+**Actor**
+
+Ingeniero electrónico.
+
+**Flujo**
+
+1. Define la ecuación diferencial que modela el circuito RC.
+2. Establece las condiciones iniciales.
+3. Selecciona el método RK4.
+4. Ejecuta el cálculo numérico.
+5. Analiza los resultados obtenidos.
+
+**Postcondición**
+
+Se obtiene una aproximación numérica precisa de la solución de la ecuación diferencial del circuito RC.
+
+### CU-Interp-02: Interpolar un perfil de terreno mediante splines
+
+**Actor**
+
+Topógrafo.
+
+**Flujo**
+
+1. Registra los puntos de elevación del terreno.
+2. Ingresa los datos en la librería.
+3. Selecciona el método de interpolación por splines.
+4. Genera una curva suave.
+5. Analiza el perfil interpolado.
+
+**Postcondición**
+
+Se obtiene una representación continua y suave del perfil del terreno.
+
+### CU-Regr-01: Ajustar datos experimentales mediante mínimos cuadrados
+
+**Actor**
+
+Analista de datos.
+
+**Flujo**
+
+1. Recopila los datos experimentales.
+2. Ingresa los datos en la librería.
+3. Selecciona el método de mínimos cuadrados.
+4. Calcula los parámetros del modelo.
+5. Evalúa el ajuste obtenido.
+
+**Postcondición**
+
+Se obtiene una función que representa la tendencia de los datos experimentales.

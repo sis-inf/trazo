@@ -1,68 +1,97 @@
 // METODO DE NEWTON-RAPHSON
 
-function newtonRaphson({ f, df, x0, tolerancia = 1e-6, maxIter = 100 }) {
- 
-  if (typeof f !== "function") {
-    throw new TypeError(
-      `Trazo.newtonRaphson: 'f' debe ser una función. Se recibió: ${typeof f}`
-    );
-  }
- 
-  if (typeof df !== "function") {
-    throw new TypeError(
-      `Trazo.newtonRaphson: 'df' debe ser una función (la derivada de f). Se recibió: ${typeof df}`
-    );
-  }
- 
-  if (typeof x0 !== "number" || isNaN(x0)) {
-    throw new TypeError(
-      `Trazo.newtonRaphson: 'x0' debe ser un número válido. Se recibió: ${x0}`
-    );
-  }
- 
-  if (typeof tolerancia !== "number" || tolerancia <= 0) {
-    throw new TypeError(
-      "Trazo.newtonRaphson: 'tolerancia' debe ser un número positivo."
-    );
-  }
- 
-  if (typeof maxIter !== "number" || maxIter < 1 || !Number.isInteger(maxIter)) {
-    throw new TypeError(
-      "Trazo.newtonRaphson: 'maxIter' debe ser un entero mayor a 0."
-    );
-  }
- 
- 
-  let x = x0;
-  const iteraciones = [];
-  let convergio = false;
- 
-  for (let iter = 0; iter < maxIter; iter++) {
-    const fx  = f(x);
-    const dfx = df(x);
- 
-    if (dfx === 0) {
-      throw new Error(
-        `Trazo.newtonRaphson: la derivada df(x) es cero en x = ${x} ` +
-        `(iteración ${iter + 1}). El método no puede continuar. ` +
-        `Considera elegir un punto inicial x0 diferente.`
-      );
+import { crearResultado, medirTiempo } from "../core/contrato.js";
+import { ErrorDominio } from "../core/errores.js";
+import {
+  validarFuncion,
+  validarNumero,
+  validarTolerancia,
+  validarIteraciones,
+} from "../utils/validaciones.js";
+
+/**
+ * Encuentra una raíz mediante el método de Newton-Raphson.
+ *
+ * @param {Object} opciones
+ * @param {Function} opciones.f Función objetivo.
+ * @param {Function} opciones.df Derivada de la función.
+ * @param {number} opciones.x0 Aproximación inicial.
+ * @param {number} [opciones.tolerancia=1e-6]
+ * @param {number} [opciones.maxIter=100]
+ * @returns {Object} Resultado siguiendo el contrato de Trazo.
+ */
+function newtonRaphson({
+  f,
+  df,
+  x0,
+  tolerancia = 1e-6,
+  maxIter = 100,
+}) {
+  validarFuncion(f, "f");
+  validarFuncion(df, "df");
+  validarNumero(x0, "x0");
+  validarTolerancia(tolerancia);
+  validarIteraciones(maxIter);
+
+  const { valor, tiempo_ms } = medirTiempo(() => {
+    let x = x0;
+    const iteraciones = [];
+    let convergio = false;
+
+    for (let n = 1; n <= maxIter; n++) {
+      const fx = f(x);
+      const dfx = df(x);
+
+      if (dfx === 0) {
+        throw new ErrorDominio(
+          `Trazo.newtonRaphson: la derivada es cero en x = ${x}.`
+        );
+      }
+
+      const siguiente = x - fx / dfx;
+      const error = Math.abs(siguiente - x);
+
+      iteraciones.push({
+        n,
+        x,
+        fx,
+        dfx,
+        error,
+      });
+
+      if (error < tolerancia) {
+        convergio = true;
+        x = siguiente;
+        break;
+      }
+
+      x = siguiente;
     }
- 
-    x = x - fx / dfx;
-    iteraciones.push(x);
- 
-    if (Math.abs(f(x)) < tolerancia) {
-      convergio = true;
-      break;
-    }
-  }
- 
-  return {
-    resultado: x,
-    iteraciones,
-    convergio,
-  };
+
+    return {
+      resultado: x,
+      iteraciones,
+      convergio,
+    };
+  });
+
+  return crearResultado({
+    resultado: valor.resultado,
+    iteraciones: valor.iteraciones,
+    convergio: valor.convergio,
+    mensaje: valor.convergio
+      ? "Método convergió correctamente."
+      : "Se alcanzó el máximo de iteraciones sin converger.",
+    meta: {
+      metodo: "newton-raphson",
+      parametros: {
+        x0,
+        tolerancia,
+        maxIter,
+      },
+      tiempo_ms,
+    },
+  });
 }
- 
+
 export { newtonRaphson };

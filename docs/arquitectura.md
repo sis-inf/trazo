@@ -63,3 +63,85 @@ trazo/
 2. Define los parámetros necesarios.
 3. El sistema ejecuta el algoritmo correspondiente.
 4. Se retorna el resultado al usuario.
+
+---
+
+## Flujo detallado de datos
+
+```text
+┌─────────┐
+│ Usuario │
+└────┬────┘
+     │
+     ▼
+┌──────────────┐
+│ src/index.js │
+└──────┬───────┘
+       │
+       ▼
+┌──────────────────┐
+│ Módulo específico│
+│ (bisección,      │
+│ integración, etc)│
+└──────┬───────────┘
+       │
+       ▼
+┌─────────────────────────┐
+│ src/utils/validaciones.js│
+└──────┬──────────────────┘
+       │
+       ▼
+┌────────────────────┐
+│ convergence.js     │
+└──────┬─────────────┘
+       │
+       ▼
+┌────────────────────┐
+│ Resultado final    │
+└────────────────────┘
+```
+
+### Flujo de errores
+
+Los módulos utilizan las utilidades de validación y convergencia para verificar que los datos de entrada y el proceso numérico sean correctos.
+
+Cuando ocurre una condición inválida, se genera una excepción `NumericalError`, la cual se propaga hasta el usuario.
+
+```text
+validaciones.js / convergence.js
+                │
+                ▼
+         NumericalError
+                │
+                ▼
+          src/index.js
+                │
+                ▼
+             Usuario
+```
+
+## Capa de utilidades
+
+La carpeta de utilidades concentra funcionalidades compartidas por todos los métodos numéricos de la librería.
+
+### validaciones.js
+
+Responsable de:
+
+- Verificar tipos de datos.
+- Validar parámetros obligatorios.
+- Comprobar rangos válidos.
+- Detectar entradas inconsistentes.
+
+### convergence.js
+
+Responsable de:
+
+- Evaluar criterios de convergencia.
+- Controlar tolerancias numéricas.
+- Verificar el número máximo de iteraciones.
+- Detectar casos donde un método no converge.
+
+### Redondeo
+
+Las funciones de redondeo permiten mantener consistencia en la presentación de resultados numéricos y reducir diferencias provocadas por la representación de números en punto flotante.

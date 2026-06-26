@@ -1,27 +1,146 @@
-# Preguntas frecuentes sobre la librería Trazo
+# Preguntas Frecuentes (FAQ) - Trazo
 
 ## ¿Qué es Trazo?
 
-Trazo es una librería ligera para el procesamiento y análisis de trazos manuscritos. Permite capturar, normalizar y extraer características de dibujos o escritura a mano en aplicaciones web y móviles.
+Trazo es una librería de métodos numéricos en JavaScript diseñada para resolver problemas matemáticos mediante métodos de aproximación. Está pensada para estudiantes, ingenieros y profesionales que necesitan realizar cálculos numéricos sin tener que implementar los algoritmos desde cero.
 
-## ¿Qué métodos principales ofrece Trazo?
+## ¿Qué métodos numéricos están disponibles?
 
-La librería incluye métodos como `capturar()`, `normalizar()`, `suavizar()`, `calcularLongitud()`, `obtenerPuntosClave()` y `exportarJSON()`. También dispone de utilidades para detectar ángulos, velocidad y aceleración del trazo.
+Trazo actualmente incluye los siguientes métodos:
 
-## ¿Cómo integro Trazo en mi proyecto?
+- **Sistemas de ecuaciones lineales:** Eliminación de Gauss, Gauss-Jordan, Descomposición LU, Jacobi, Gauss-Seidel
+- **Sistemas de ecuaciones no lineales:** Bisección, Secante, Newton-Raphson, Falsa Posición, Punto Fijo
+- **Interpolación:** Lagrange, Newton
+- **Integración numérica:** Regla del Trapecio, Simpson (1/3 y 3/8), Cuadratura de Gauss
 
-Puedes integrar Trazo instalándolo vía npm con `npm install trazo` o incluyendo el script desde CDN:  
-`<script src="https://cdn.ejemplo.com/trazo.min.js"></script>`.  
-Luego, inicializa un nuevo objeto `Trazo()` y usa sus métodos según la documentación oficial.
+> **Nota:** La librería está en desarrollo activo y se irán agregando más métodos.
 
-## ¿Qué precisión tiene Trazo en el reconocimiento de trazos?
+## ¿Cómo instalo e integro Trazo en mi proyecto?
 
-La precisión depende de la calidad del dispositivo de entrada (pantalla táctil, lápiz óptico, ratón). En condiciones óptimas, Trazo alcanza una precisión submilimétrica en dispositivos modernos. Para escritura manuscrita, la tasa de acierto en caracteres aislados supera el 96%.
+```bash
+git clone https://github.com/sis-inf/trazo.git
+cd trazo
+npm install
+```
 
-## ¿Cómo puedo reportar un error o sugerir una mejora?
+## Preguntas Frecuentes sobre JavaScript y Node.js
 
-Puedes reportar errores abriendo un issue en el repositorio oficial de GitHub (https://github.com/trazo/trazo/issues). Incluye la versión de la librería, el navegador/sistema operativo, un ejemplo mínimo reproducible y los pasos para replicar el fallo.
+## ¿Cuál es la diferencia entre `import` y `require` en trazo?
 
-## ¿Trazo es compatible con React, Vue o Angular?
+`import` pertenece al sistema de módulos ES (ESM) y `require` al sistema CommonJS.
 
-Sí, Trazo es agnóstico del framework. Puedes usarlo con React, Vue, Angular o vanilla JS. Solo necesitas una referencia al elemento DOM donde se capturará el trazo y llamar a los métodos de la librería dentro de los ciclos de vida apropiados.
+Ejemplo con ESM:
+
+```js
+import { suma } from "./suma.js";
+```
+
+Ejemplo con CommonJS:
+
+```js
+const { suma } = require("./suma");
+```
+
+---
+
+## ¿Por qué Jest no encuentra mi test?
+
+Verifica que el archivo siga alguno de los patrones reconocidos por Jest:
+
+```text
+archivo.test.js
+archivo.spec.js
+```
+
+También puedes ejecutar:
+
+```bash
+npm test
+```
+
+para ver los detalles del error.
+
+---
+
+## ¿Cómo ejecuto solo un test específico con Jest?
+
+Puedes usar la opción `-t`:
+
+```bash
+npx jest -t "nombre del test"
+```
+
+O marcar un test con `.only`:
+
+```js
+test.only("mi prueba", () => {
+  // código
+});
+```
+
+---
+
+## ¿Puedo usar trazo en el navegador?
+
+Trazo está diseñado principalmente para ejecutarse en Node.js. Si deseas utilizarlo en un navegador, revisa primero la documentación del proyecto y verifica que las dependencias sean compatibles.
+
+---
+
+## ¿Cómo interpreto el reporte de cobertura?
+
+Genera el reporte ejecutando:
+
+```bash
+npm test -- --coverage
+```
+
+Los porcentajes indican cuánto código fue ejecutado por los tests:
+
+- Statements: instrucciones ejecutadas.
+- Branches: ramas cubiertas.
+- Functions: funciones probadas.
+- Lines: líneas ejecutadas.
+
+---
+
+## ¿Qué hace `npm run build`?
+
+Ejecuta el script `build` definido en el archivo `package.json`.
+
+Por ejemplo:
+
+```bash
+npm run build
+```
+
+Normalmente se utiliza para generar una versión lista para producción.
+
+---
+
+## ¿Por qué Prettier cambió mi código?
+
+Prettier aplica reglas automáticas de formato para mantener un estilo consistente.
+
+Puedes ejecutarlo manualmente con:
+
+```bash
+npx prettier --write .
+```
+
+---
+
+## ¿Cómo instalo nuevamente las dependencias del proyecto?
+
+Si existe algún problema con los paquetes, elimina `node_modules` e instala nuevamente:
+
+```bash
+rm -rf node_modules
+npm install
+```
+
+En Windows:
+
+```powershell
+rmdir /s node_modules
+npm install
+```

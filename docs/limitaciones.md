@@ -7,10 +7,18 @@ A continuación se describen las limitaciones conocidas de la librería Trazo en
 ## 1. Precisión limitada por uso de JavaScript
 
 **Descripción:**  
-La librería utiliza el tipo de dato `Number` de JavaScript, lo que puede generar errores de precisión en cálculos numéricos.
+La librería utiliza el tipo de dato `Number` de JavaScript, basado en el estándar IEEE 754 de doble precisión (64 bits). Esto proporciona aproximadamente entre 15 y 17 dígitos significativos de precisión y un rango aproximado de valores entre `5e-324` y `1.8e308`.
+
+Debido a estas limitaciones, pueden producirse errores de redondeo y pérdida de precisión en cálculos numéricos que involucren números muy grandes, muy pequeños o una gran cantidad de operaciones sucesivas.
+
+JavaScript no proporciona soporte nativo para aritmética de precisión arbitraria en números de punto flotante. Los cálculos que requieran una precisión superior deben utilizar librerías externas especializadas.
+
+Asimismo, JavaScript no incluye tipos matriciales optimizados ni bibliotecas de álgebra lineal equivalentes a BLAS de forma nativa, por lo que operaciones matriciales de gran tamaño pueden presentar limitaciones de rendimiento.
+
+Estas restricciones pueden afectar métodos numéricos que requieren alta precisión, tales como métodos iterativos con tolerancias muy pequeñas, problemas mal condicionados o cálculos científicos de gran escala.
 
 **Workaround:**  
-Ajustar tolerancias en los métodos numéricos o utilizar librerías externas de alta precisión si es necesario.
+Ajustar tolerancias en los métodos numéricos, evitar exigir precisión superior a la soportada por `Number` y utilizar librerías externas de alta precisión o álgebra lineal cuando sea necesario.
 
 ---
 

@@ -39,6 +39,43 @@ E_r = |(2.003 - 1.990) / 2.003| × 100% ≈ 0.649%
 ```
 
 ---
+## Error relativo aproximado
+
+El **error relativo aproximado** mide la diferencia entre dos aproximaciones consecutivas cuando no se conoce el valor real de la solucion. Es uno de los errores mas utilizados en metodos iterativos.
+
+```
+E_ra = |x_nuevo - x_viejo| / |x_nuevo|
+
+```
+
+Donde:
+
+- `x_nuevo` es la aproximacion actual.
+- `x_viejo` es la aproximacion obtenida en la iteracion anterior.
+
+**¿Cuando se utiliza?**
+
+Se utiliza principalmente en metodos iterativos como biseccion, Newton-Raphson, secante y punto fijo, donde el valor exacto de la solucion generalmente es desconocido.
+
+**Relacion con el criterio de parada**
+
+El error relativo aproximado suele emplearse como criterio de convergencia. El metodo continua iterando hasta que:
+```
+E_ra < tolerancia
+```
+
+Cuando esta condicion se cumple, se considera que la aproximacion alcanzada tiene la precision requerida.
+
+**Ejemplo:**
+Si en dos iteraciones consecutivas del metodo de biseccion se obtienen los valores `1.5000` y `1.5625`, entonces:
+```
+E_ra = |1.5625 - 1.5000| / |1.5625|
+E_ra = 0.04
+```
+
+Por lo tanto, el error relativo aproximado es `0.04` (4%).
+
+---
 
 ## Criterio de convergencia
 

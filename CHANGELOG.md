@@ -1,25 +1,55 @@
-# Changelog
+# \# Changelog
 
-Todos los cambios notables de este proyecto serán documentados en este archivo.
+# 
 
-El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
-y este proyecto sigue el versionado [SemVer](https://semver.org/lang/es/).
+##### All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+##### 
 
-### Agregado
-- Estructura inicial del proyecto Trazo
-- Organización de carpetas bajo la arquitectura definida
-- Documentación inicial (README, guías de contribución, estándares de código, etc.)
+##### The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
-### Cambiado
-- N/A
+# 
 
-### Corregido
-- N/A
+# \## \[Unreleased]
 
-## [0.1.0] - 2026-04-19
+# 
 
-### Agregado
-- Inicio del proyecto Trazo
-- Creación del repositorio
+# \### Added
+
+# 
+
+* ##### Added finite difference methods.
+* ##### Added new methods incorporated during the current sprint.
+* ##### Added examples and documentation for newly implemented functionality.
+
+##### 
+
+# \### Changed
+
+# 
+
+* ##### Consolidated duplicated directories into a unified project structure.
+* ##### Updated project organization to reflect the directory consolidation.
+
+# 
+
+# \### Fixed
+
+# 
+
+* ##### Converted legacy Python tests to Jest.
+* ##### Fixed test execution and compatibility issues in the JavaScript testing environment.
+
+# 
+
+# \## \[0.1.0] - 2026-04-19
+
+# 
+
+# \### Added
+
+# 
+
+* ##### Initial Trazo project setup.
+* ##### Repository creation.
+

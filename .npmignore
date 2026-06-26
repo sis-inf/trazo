@@ -4,20 +4,25 @@
 
 # Docs
 docs/
-README.md
 CONTRIBUTING.md
 CHANGELOG.md
 
 # Tests
 test/
 tests/
+coverage/
+*.test.js
+test.js
 
 # Config
+.editorconfig
 .eslintrc
 .eslintrc.js
 .eslintrc.json
+.prettierrc.json
 eslint.config.js
 rollup.config.mjs
+jest.config.js
 
 # Data
 data/

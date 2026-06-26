@@ -1,39 +1,59 @@
+import { crearResultado } from "../core/contrato.js";
+import { ErrorParametros } from "../core/errores.js";
 import {
   validarFuncion,
-  validarNumero,
+  validarIntervalo,
+  validarTolerancia,
+  validarIteraciones,
 } from "../utils/validaciones.js";
 
-// METODO DE BISECCION
-
+/**
+ * Encuentra una raíz de f(x) = 0 en [a, b] usando el Método de Bisección.
+ *
+ * @param {Object} parametros - Parámetros de entrada del método.
+ * @param {Function} parametros.f - Función continua a evaluar. Debe recibir un número y devolver un número.
+ * @param {number} parametros.a - Extremo izquierdo del intervalo inicial.
+ * @param {number} parametros.b - Extremo derecho del intervalo inicial.
+ * @param {number} [parametros.tolerancia=1e-6] - Criterio de parada basado en el error absoluto.
+ * @param {number} [parametros.maxIter=100] - Número máximo de iteraciones permitidas.
+ * @returns {{
+ *   resultado: number,
+ *   iteraciones: Array<{
+ *     n: number,
+ *     a: number,
+ *     b: number,
+ *     c: number,
+ *     fa: number,
+ *     fb: number,
+ *     fc: number,
+ *     error: number
+ *   }>,
+ *   convergio: boolean,
+ *   mensaje: string,
+ *   meta: {
+ *     metodo: string,
+ *     parametros: {
+ *       a: number,
+ *       b: number,
+ *       tolerancia: number,
+ *       maxIter: number
+ *     },
+ *     tiempo_ms: number
+ *   }
+ * }} Objeto de resultado siguiendo el contrato de Trazo.
+ * @throws {ErrorParametros} Si la función no es válida, el intervalo es inválido, la tolerancia o el máximo de iteraciones no son válidos, o si f(a) · f(b) >= 0.
+ */
 function biseccion({ f, a, b, tolerancia = 1e-6, maxIter = 100 }) {
-
   validarFuncion(f, "f");
-  validarNumero(a, "a");
-  validarNumero(b, "b");
-  validarNumero(tolerancia, "tolerancia");
-
-  if (a >= b) {
-    throw new Error(
-      `Trazo.biseccion: 'a' (${a}) debe ser menor que 'b' (${b}).`
-    );
-  }
-
-  if (
-    typeof maxIter !== "number" ||
-    maxIter < 1 ||
-    !Number.isInteger(maxIter)
-  ) {
-    throw new TypeError(
-      "Trazo.biseccion: 'maxIter' debe ser un entero mayor a 0."
-    );
-  }
+  validarIntervalo(a, b);
+  validarTolerancia(tolerancia);
+  validarIteraciones(maxIter);
 
   if (f(a) * f(b) >= 0) {
-    throw new Error(
-      `Trazo.biseccion: f(a) * f(b) >= 0. ` +
+    throw new ErrorParametros(
+      `Trazo.biseccion: f(a) · f(b) >= 0. ` +
       `f(${a}) = ${f(a)}, f(${b}) = ${f(b)}. ` +
-      `El método de Bisección requiere que f cambie de signo en [a, b]. ` +
-      `Elige un intervalo donde f(a) y f(b) tengan signos opuestos.`
+      `El intervalo [a, b] debe contener un cambio de signo.`
     );
   }
 
@@ -41,33 +61,43 @@ function biseccion({ f, a, b, tolerancia = 1e-6, maxIter = 100 }) {
   let der = b;
   let c = izq;
   const iteraciones = [];
+  let convergio = false;
 
-  // Indica si el metodo logro converger antes de alcanzar maxIter
-  let convergencia = false;
-
-  for (let iter = 0; iter < maxIter; iter++) {
+  for (let n = 0; n < maxIter; n++) {
     c = (izq + der) / 2;
-    iteraciones.push(c);
 
+    const fa = f(izq);
+    const fb = f(der);
     const fc = f(c);
+    const error = Math.abs(der - izq) / 2;
 
-    if (Math.abs(fc) < tolerancia) {
-      convergencia = true;
+    iteraciones.push({ n: n + 1, a: izq, b: der, c, fa, fb, fc, error });
+
+    if (error < tolerancia) {
+      convergio = true;
       break;
     }
 
-    if (f(izq) * fc < 0) {
+    if (fa * fc < 0) {
       der = c;
     } else {
       izq = c;
     }
   }
 
-  return {
+  return crearResultado({
     resultado: c,
     iteraciones,
-    convergencia,
-  };
+    convergio,
+    mensaje: convergio
+      ? `Convergió en ${iteraciones.length} iteraciones.`
+      : `Se alcanzó el máximo de ${maxIter} iteraciones sin converger.`,
+    meta: {
+      metodo: "biseccion",
+      parametros: { a, b, tolerancia, maxIter },
+      tiempo_ms: 0,
+    },
+  });
 }
 
 export { biseccion };
