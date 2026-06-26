@@ -7,7 +7,7 @@ Esta guía define convenciones para escribir código JavaScript limpio, consiste
 
 - Usar `camelCase`.
 - Los nombres deben ser descriptivos y claros.
-- Evitar abreviaciones innecesarias.
+-Usar nombres en inglés para mantener consistencia en el proyecto.
 
 ### ✅ Ejemplos:
 
@@ -62,10 +62,7 @@ import { sum } from './math-utils.js';
 ```
 ### 🎯 ¿Por qué esto es importante?
 
-- Es el estándar moderno de JavaScript.  
-- Mejor soporte en frontend y backend. 
-- Más claro y estructurado.
-- Compatible con herramientas actuales.
+El uso de inglés en el código permite mayor consistencia, facilita la colaboración entre desarrolladores y sigue estándares internacionales.
 
 ## 📐 4. Indentación y formato
 
@@ -194,4 +191,182 @@ if (product.isAvailable()) {
 - JSDoc → documentación
 - `===` → comparaciones estrictas
 - Consistencia > preferencias personales
-- Código → Inglés (recomendado)
+-Código → Inglés (obligatorio)
+
+## 🧪 10. Convenciones específicas de JavaScript ES2020
+
+Esta sección complementa las reglas anteriores con ejemplos lado a lado (✅ correcto / ❌ incorrecto) para convenciones modernas de JavaScript.
+
+### 10.1 `const` / `let` en lugar de `var`
+
+`var` tiene alcance de función (no de bloque) y permite redeclaraciones, lo que genera bugs difíciles de rastrear. Usar `const` por defecto y `let` solo cuando el valor cambia.
+
+#### ✅ Correcto
+
+```js
+const MAX_RETRIES = 3;
+
+let attempts = 0;
+while (attempts < MAX_RETRIES) {
+  attempts += 1;
+}
+```
+
+#### ❌ Incorrecto
+
+```js
+var MAX_RETRIES = 3;
+
+var attempts = 0;
+while (attempts < MAX_RETRIES) {
+  attempts += 1;
+}
+```
+
+### 10.2 Arrow functions vs `function`
+
+Usar arrow functions para callbacks y funciones anónimas, ya que no redefinen `this`. Usar `function` para métodos de objetos, clases o cuando se necesita un `this` propio.
+
+#### ✅ Correcto
+
+```js
+const numbers = [1, 2, 3];
+
+const doubled = numbers.map((n) => n * 2);
+
+class Carrito {
+  constructor() {
+    this.items = [];
+  }
+
+  agregar(item) {
+    this.items.push(item);
+  }
+}
+```
+
+#### ❌ Incorrecto
+
+```js
+const numbers = [1, 2, 3];
+
+const doubled = numbers.map(function (n) {
+  return n * 2;
+});
+
+class Carrito {
+  constructor() {
+    this.items = [];
+  }
+
+  agregar = (item) => {
+    this.items.push(item);
+  };
+}
+```
+
+### 10.3 Destructuring en retornos
+
+Cuando una función retorna un objeto con varias propiedades, usar destructuring al consumirlo en lugar de acceder propiedad por propiedad.
+
+#### ✅ Correcto
+
+```js
+function getUser() {
+  return { id: 1, name: 'Ana', email: 'ana@example.com' };
+}
+
+const { id, name, email } = getUser();
+```
+
+#### ❌ Incorrecto
+
+```js
+function getUser() {
+  return { id: 1, name: 'Ana', email: 'ana@example.com' };
+}
+
+const user = getUser();
+const id = user.id;
+const name = user.name;
+const email = user.email;
+```
+
+### 10.4 JSDoc con `@param` y `@returns` tipados
+
+Toda función pública debe documentarse con JSDoc indicando el tipo de cada parámetro y del valor de retorno.
+
+#### ✅ Correcto
+
+```js
+/**
+ * Calcula el descuento aplicado a un precio.
+ *
+ * @param {number} price - Precio original del producto.
+ * @param {number} percentage - Porcentaje de descuento (0-100).
+ * @returns {number} Precio final con el descuento aplicado.
+ */
+const applyDiscount = (price, percentage) => {
+  return price - (price * percentage) / 100;
+};
+```
+
+#### ❌ Incorrecto
+
+```js
+// Calcula el descuento
+const applyDiscount = (price, percentage) => {
+  return price - (price * percentage) / 100;
+};
+```
+
+### 10.5 Nombres de funciones en `camelCase`
+
+Los nombres de funciones deben usar `camelCase` y representar una acción (verbo + complemento).
+
+#### ✅ Correcto
+
+```js
+function calculateShippingCost(weight, distance) {
+  return weight * distance * 0.5;
+}
+
+const isUserActive = (user) => user.status === 'active';
+```
+
+#### ❌ Incorrecto
+
+```js
+function Calculate_Shipping_Cost(weight, distance) {
+  return weight * distance * 0.5;
+}
+
+const user_active = (user) => user.status === 'active';
+```
+
+### 10.6 Módulos ES (`import`/`export`) en lugar de `require`
+
+El proyecto usa módulos ES en lugar de CommonJS. Preferir `import`/`export` sobre `require`/`module.exports`.
+
+#### ✅ Correcto
+
+```js
+// math-utils.js
+export const sum = (a, b) => a + b;
+export const multiply = (a, b) => a * b;
+
+// app.js
+import { sum, multiply } from './math-utils.js';
+```
+
+#### ❌ Incorrecto
+
+```js
+// math-utils.js
+const sum = (a, b) => a + b;
+const multiply = (a, b) => a * b;
+module.exports = { sum, multiply };
+
+// app.js
+const { sum, multiply } = require('./math-utils.js');
+```

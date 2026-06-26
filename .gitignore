@@ -52,8 +52,12 @@ target/
 coverage/
 .coverage
 htmlcov/
+.nyc_output/
 
 # Datos sensibles
 *.pem
 *.key
 *.cert
+
+# Lock files (librería: no versionar)
+package-lock.json

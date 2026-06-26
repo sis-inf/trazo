@@ -1,108 +1,87 @@
-# 📚 Estructura de la carpeta src
+# Estructura de la carpeta src
 
 ```bash
 src/
+├── analisis/
+├── diferencias/
+├── matricial/
+├── polinomios/
+├── io/
 ├── core/
-├── ecuaciones/
-├── edo/
-├── integracion/
-├── interpolacion/
-├── sistemas/
-└── utils/
 ```
 
 Este directorio contiene la implementación de distintos métodos numéricos organizados según la categoría del problema que resuelven.
-
 ---
 
-> [!NOTE]
-> La arquitectura del proyecto está diseñada bajo un enfoque modular y extensible. La incorporación de nuevos métodos numéricos o la creación de nuevas categorías no afecta el comportamiento existente, siempre que se respete la organización por tipo de método y la consistencia estructural del código.
+## Descripción de Directorios
 
----
+### `analisis/`
 
-## 📂 Descripción de Directorios
-
-### 🔹 `ecuaciones/`
-
-Métodos para resolver ecuaciones no lineales.
+Métodos de análisis numérico.
 
 Ejemplos:
 
-* Bisección
-* Newton-Raphson
-* Secante
+* Mínimos cuadrados
 
 ---
 
-### 🔹 `sistemas/`
+### `diferencias/`
 
-Métodos para resolver sistemas de ecuaciones lineales.
+Métodos de derivación numérica.
 
 Ejemplos:
 
-* Gauss
-* Gauss-Jordan
-* Jacobi
-* Gauss-Seidel
-
+* Diferencias finitas
 ---
 
-### 🔹 `integracion/`
+### `integracion/`
 
 Métodos de integración numérica.
 
 Ejemplos:
 
 * Regla del trapecio
-* Simpson
+* Simpson 1/3
 * Simpson 3/8
 
 ---
 
-### 🔹 `interpolacion/`
+### `matricial/`
 
-Métodos de interpolación de datos.
+Métodos para sistemas de ecuaciones lineales.
+
+Ejemplos:
+
+* Gauss
+* Gauss-Jordan
+* LU
+* Jacobi
+* Gauss-Seidel
+
+---
+
+### `polinomios/`
+
+Métodos de interpolación y aproximación.
 
 Ejemplos:
 
 * Lagrange
-* Interpolación de Newton
-
+* Newton
+* Splines cúbicos
 ---
 
-### 🔹 `edo/`
+### `io/`
 
-Métodos para resolver ecuaciones diferenciales ordinarias.
+Manejo de entrada y salida de datos.
 
 Ejemplos:
 
-* Euler
-* Runge-Kutta
+* Formateo de resultados
+* Exportación de datos
 
 ---
 
-### 🔹 `utils/`
+### `core/`
 
-Funciones auxiliares reutilizables.
-
-Ejemplos:
-
-* Operaciones matemáticas
-* Manejo de matrices
-* Funciones de apoyo
-
----
-
-### 🔹 `core/`
-
-Componentes base e interfaces comunes para los métodos.
-
----
-
-## 🧩 Principios de Diseño
-
-* **Modularidad**: Cada método numérico se implementa como un módulo independiente, con una única responsabilidad bien definida.
-* **Extensibilidad**: Es posible incorporar nuevos métodos o categorías sin modificar la estructura existente, manteniendo una organización coherente por tipo de problema.
-* **Escalabilidad**: La estructura del proyecto permite crecer de forma ordenada conforme se añaden nuevos algoritmos o funcionalidades.
-* **Separación de responsabilidades**: La lógica de cálculo, utilidades y organización por categorías se mantiene desacoplada para facilitar el mantenimiento.
-* **Simplicidad**: Se prioriza un diseño claro y comprensible, orientado a facilitar el aprendizaje y la reutilización del código.
+Componentes base y manejo de errores comunes para los métodos numéricos.
