@@ -52,12 +52,23 @@ export { polyEval } from './interpolacion/polyEval.js';
  * Re-exporta el método público de Newton-Raphson.
  */
 export { newtonRaphson } from './no-lineales/newton-raphson.js';
-/**
 
-* Agrupador para métodos no lineales.
+/**
+ * Agrupador para métodos no lineales.
  */
 import { biseccion } from './no-lineales/biseccion.js';
 export { biseccion };
 export const noLineales = {
   biseccion
 };
+
+/**
+ * Re-exporta las operaciones básicas de álgebra de matrices (issue #650).
+ */
+export {
+  sumaMatrices,
+  restaMatrices,
+  multiplicarMatrices,
+  transpuesta,
+  multiplicarEscalar
+} from './matricial/algebra_matrices.js';
