@@ -16,6 +16,7 @@ import { simpson13 } from './integracion/simpson-13.js';
 import { simpson38 } from './integracion/simpson-38.js';
 import { simpsonCompuesto } from './integracion/simpson_compuesto.js';
 import { trapecio } from './integracion/trapecio.js';
+import { integracionMonteCarlo } from './integracion/monte_carlo.js';
 
 import { lagrange } from './interpolacion/lagrange.js';
 import { linearInterpolation } from './interpolacion/linear.js';
@@ -47,6 +48,14 @@ import { puntoFijo } from './no-lineales/punto-fijo.js';
 import { secante } from './no-lineales/secante.js';
 
 import { evaluarHorner } from './polinomios/horner.js';
+
+// Importaciones de estadística descriptiva (issue #659)
+import {
+  media,
+  varianza,
+  desviacionEstandar,
+  mediana
+} from './utils/estadistica.js';
 
 const lineales = {
   gauss,
@@ -83,7 +92,8 @@ const integracion = {
   simpson13,
   simpson38,
   derivative,
-  simpsonCompuesto
+  simpsonCompuesto,
+  integracionMonteCarlo
 };
 
 const edo = {
@@ -116,6 +126,13 @@ const polinomios = {
   evaluarHorner
 };
 
+const estadistica = {
+  media,
+  varianza,
+  desviacionEstandar,
+  mediana
+};
+
 export {
   lineales,
   noLineales,
@@ -126,6 +143,7 @@ export {
   diferencias,
   matricial,
   polinomios,
+  estadistica,
 
   // lineales
   gauss,
@@ -160,6 +178,7 @@ export {
   simpson38,
   derivative,
   simpsonCompuesto,
+  integracionMonteCarlo,
 
   // edo
   euler,
@@ -184,7 +203,13 @@ export {
   normaFrobenius,
 
   // polinomios
-  evaluarHorner
+  evaluarHorner,
+
+  // estadistica (issue #659)
+  media,
+  varianza,
+  desviacionEstandar,
+  mediana
 };
 
 export default {
@@ -197,6 +222,7 @@ export default {
   diferencias,
   matricial,
   polinomios,
+  estadistica,
 
   // exportaciones planas para acceso directo
   ...lineales,
@@ -207,5 +233,6 @@ export default {
   ...analisis,
   ...diferencias,
   ...matricial,
-  ...polinomios
+  ...polinomios,
+  ...estadistica
 };
