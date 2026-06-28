@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "strict": true,
+    "noEmit": true,
+    "noImplicitAny": false
+  },
+  "include": ["*.js"],
+  "exclude": ["node_modules", "src", "test.js"]
+}

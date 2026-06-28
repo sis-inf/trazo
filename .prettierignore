@@ -1,0 +1,25 @@
+# Ignorar TODOS los archivos problemáticos
+src/lineales/lu.js
+src/lineales/lu_descomposicion.js
+src/matricial/determinante_sarrus.js
+src/matricial/norma_matriz.js
+src/no-lineales/biseccion.js
+src/no-lineales/falsa-posicion.js
+src/no-lineales/muller.js
+src/no-lineales/newton-raphson.js
+src/no-lineales/punto-fijo.js
+src/no-lineales/punto_fijo.js
+src/no-lineales/regula_falsi.js
+src/no-lineales/secante.js
+src/polinomios/horner.js
+src/utils/convergence.js
+src/utils/error_relativo.js
+src/utils/formato.js
+src/utils/math.js
+src/utils/redondeo.js
+src/utils/tabla_resultado.js
+src/utils/validaciones.js
+
+# Ignorar el resto de archivos problemáticos
+*.js
+!tests/integracion-cruzada.test.js

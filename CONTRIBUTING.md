@@ -97,7 +97,21 @@ git commit -m "tipo: descripción corta en presente"
 ```
 Para saber de que *tipo* debes realizar el commit revisa el apartado de [convención de commits](#convención-de-commits).
 
-### 7. Sube tu rama a tu fork
+### 7. Antes de hacer commit
+
+Antes de realizar un commit, asegúrate de ejecutar los siguientes comandos para verificar que el código cumple con los estándares del proyecto:
+
+```bash
+npm test
+npm run format:check
+npm run lint
+```
+Además, instala los hooks de pre-commit si aún no lo hiciste:
+```bash 
+pre-commit install
+```
+---
+### 8. Sube tu rama a tu fork
 
 ***tipo/descripcion-corta = el nombre de la rama donde trabajaste.***
 
@@ -105,7 +119,7 @@ Para saber de que *tipo* debes realizar el commit revisa el apartado de [convenc
 git push origin tipo/descripcion-corta
 ```
 
-### 8. Abre un Pull Request
+### 9. Abre un Pull Request
 1. Ve a tu Fork en GitHub, aquel repositorio que está en tu cuenta personal.
 2. Click en el banner de color amarillo: "Compare & pull request"
    En caso de que no aparezca: 
@@ -137,7 +151,21 @@ docs: agregar guía de instalación en Windows
 test: agregar pruebas unitarias para módulo de disco
 chore: configurar GitHub Actions para CI
 
----
+
+## Nomenclatura de directorios y archivos
+
+Este proyecto usa español como idioma estándar para la estructura de carpetas. Crear directorios con nombres en inglés (como integration, linearAlgebra o math) es un error frecuente que será rechazado en el PR.
+
+**Directorios canónicos bajo src/**
+
+| Directorio | Contenido |
+|---|---|
+| src/lineales/ | Métodos para sistemas de ecuaciones lineales |
+| src/no-lineales/ | Métodos para sistemas de ecuaciones no lineales |
+| src/interpolacion/ | Métodos de interpolación |
+| src/integracion/ | Métodos de integración numérica |
+| src/utils/ | Utilidades y validaciones compartidas |
+
 
 ## Reglas importantes
 
@@ -149,7 +177,6 @@ chore: configurar GitHub Actions para CI
 - ✅ Todo PR necesita al menos una revisión
 
 ---
-
 ## Ramas del proyecto
 
 | Rama | Propósito |
@@ -162,6 +189,16 @@ chore: configurar GitHub Actions para CI
 | `test/*` | Pruebas |
 | `chore/*` | Configuración |
 
+
+### Ejemplos 
+
+✅ Correcto              ❌ Incorrecto
+src/lineales/            src/linearAlgebra/
+src/no-lineales/         src/nonLinear/
+src/interpolacion/       src/interpolation/
+src/integracion/         src/integration/
+src/utils/               src/helpers/
+
 ---
 
 ## ¿No sabes por dónde empezar?
@@ -172,3 +209,59 @@ chore: configurar GitHub Actions para CI
 4. Sigue los pasos de este documento
 
 ## Errores comunes
+
+**1. Crear directorios con nombres en inglés**
+
+**Problema:** Se crea una carpeta como src/integration/, src/linearAlgebra/ o src/math/.
+**Solucion:** Usa siempre los nombres en español definidos en la sección Nomenclatura de directorios y archivos.
+
+ ✅ src/integracion/
+ ❌ src/integration/
+
+**2. Hacer push directo a main o dev**
+
+**Problema:** Se abre un Pull Request sin vincular el issue correspondiente, lo que dificulta el seguimiento del proyecto
+**Solucion:** Siempre incluye Closes #N en la descripción del PR, donde N es el número del issue que resolviste.
+
+  ✅ Closes #153
+
+  **3. No sincronizar con upstream antes de empezar**
+
+  **Problema:** Se trabaja sobre una versión desactualizada del repositorio, lo que genera conflictos al abrir el PR.
+  **Solucion:** Ejecuta siempre estos comandos antes de crear tu rama de trabajo.
+
+    git checkout dev
+    git pull upstream dev
+
+**4. Nombre de rama incorrecto**
+  
+  **Problema:** Se usa un nombre de rama que no sigue la convención del proyecto (ej: mi-rama, cambios, arreglo).
+  **Solucion:** El nombre de la rama siempre está indicado en el issue. Sigue el formato tipo/descripcion-corta.
+
+  ✅ feat/metodo-jacobi
+  ✅ fix/error-pivote-nulo
+  ✅ docs/guia-instalacion
+  ❌ mi-rama
+  ❌ cambios 
+---
+
+## Idioma del proyecto
+
+El **español** es el idioma oficial del proyecto. Tras la consolidación de directorios, todo el contenido nuevo o modificado debe escribirse en español, salvo las palabras reservadas propias del lenguaje de programación.
+
+Esto aplica a:
+- **Nombres de archivos:** Deben estar redactados en español (ej. `metodo_jacobi.py`).
+- **Nombres de funciones y métodos:** En español y de carácter descriptivo (ej. `calcularErrorRelativo()`).
+- **Nombres de variables:** En español, utilizando rigurosamente la convención **camelCase** (ej. `errorTolerancia`, `matrizIdentidad`).
+- **Documentación y comentarios:** Todo comentario dentro del código fuente y guías técnicas en Markdown deben redactarse exclusivamente en español.
+- **Mensajes de error:** En español, garantizando que sean claros y comprensibles para todo el equipo de desarrollo.
+
+### Ejemplos de nomenclatura
+
+| Elemento | ❌ Incorrecto (Inglés / Mezclado) |  Correcto (Español oficial) |
+| :--- | :--- | :--- |
+| **Archivo** | `bisectionMethod.py` | `metodo_biseccion.py` |
+| **Función** | `public void getConvergence()` | `public void obtenerConvergencia()` |
+| **Variable** | `double max_error;` / `int iterCount;` | `double errorMaximo;` / `int contadorIteraciones;` |
+| **Comentario** | `// Check if matrix is diagonally dominant` | `// Verificar si la matriz es diagonalmente dominante` |
+| **Mensaje de Error** | `"Matrix is singular"` | `"Error: La matriz es singular y no tiene solución única"` |
