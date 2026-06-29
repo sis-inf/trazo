@@ -39,6 +39,13 @@ import {
   normaInfinita,
   normaFrobenius
 } from './matricial/norma_matriz.js';
+import {
+  sumaMatrices,
+  restaMatrices,
+  multiplicarMatrices,
+  transpuesta,
+  multiplicarEscalar
+} from './matricial/algebra_matrices.js';
 
 import { biseccion } from './no-lineales/biseccion.js';
 import { falsaPosicion } from './no-lineales/falsa-posicion.js';
@@ -119,7 +126,12 @@ const matricial = {
   determinanteSarrus,
   normaEuclideana,
   normaInfinita,
-  normaFrobenius
+  normaFrobenius,
+  sumaMatrices,
+  restaMatrices,
+  multiplicarMatrices,
+  transpuesta,
+  multiplicarEscalar
 };
 
 const polinomios = {
@@ -201,6 +213,11 @@ export {
   normaEuclideana,
   normaInfinita,
   normaFrobenius,
+  sumaMatrices,
+  restaMatrices,
+  multiplicarMatrices,
+  transpuesta,
+  multiplicarEscalar,
 
   // polinomios
   evaluarHorner,
