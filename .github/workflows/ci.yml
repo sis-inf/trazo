@@ -24,7 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
+      - name: Verify package-lock.json is in sync
+        run: |
+          npm install --package-lock-only
+          git diff --exit-code package-lock.json || (
+            echo "package-lock.json desincronizado, ejecuta npm install localmente y commitea el resultado"
+            exit 1
+          )
       - name: Install dependencies
         run: npm install
 
