@@ -1,85 +1,151 @@
 # Trazo
 
-> Trazo es una librería de métodos numéricos en JavaScript diseñado para resolver problemas matemáticos mediante métodos de aproximación.
-## Inicio Rápido
-
-```bash
-npm install trazo
-
-```js
-import { biseccion } from 'trazo';
-const resultado = biseccion(x => x * x - 4, 0, 3, 0.001);
-console.log(resultado);
-```
-
-Output esperado:
-
-```text
-2.000...
-```
+> Trazo es una librería de métodos numéricos en JavaScript para resolver sistemas de ecuaciones, interpolar datos, integrar funciones y resolver ecuaciones diferenciales mediante métodos de aproximación.
 
 ## ¿Qué es?
 
-Trazo es una librería en desarrollo que implementa distintos métodos numéricos para resolver sistemas de ecuaciones lineales y no lineales, realizar interpolaciones y aplicar integración numérica de manera sencilla.
+Trazo es una librería de métodos numéricos escrita en JavaScript que implementa 20 algoritmos clásicos agrupados en cinco categorías: sistemas de ecuaciones lineales, ecuaciones no lineales, interpolación, integración numérica y ecuaciones diferenciales ordinarias (EDO). Todos los métodos siguen un contrato de retorno uniforme, lo que permite combinarlos y consumirlos de forma predecible sin importar la categoría a la que pertenezcan.
 
 ## ¿Para quién es?
 
 Este proyecto está dirigido a:
-- Estudiantes de ingeniería
-- Personas que estudian métodos numéricos
-- Profesionales que necesiten hacer cálculos aproximados en JavaScript
+
+- Estudiantes de ingeniería y ciencias que cursan métodos numéricos.
+- Docentes que necesitan ejemplos reproducibles para sus clases.
+- Desarrolladores que requieren cálculos de aproximación numérica dentro de aplicaciones JavaScript, sin reimplementar los algoritmos desde cero.
 
 ## ¿Qué problema resuelve?
 
-Trazo facilita la implementación de algoritmos matemáticos complejos, evitando que el usuario tenga que programarlos desde cero y permitiéndole enfocarse en su aplicación.
-
-## Métodos numéricos disponibles
-
-| Categoría                     | Método                              |
-|-----------------------------|-------------------------------------|
-| Sistemas lineales           | Eliminación de Gauss                |
-| Sistemas lineales           | Gauss-Jordan                       |
-| Sistemas lineales           | Descomposición LU                  |
-| Sistemas lineales           | Jacobi                             |
-| Sistemas lineales           | Gauss-Seidel                       |
-| Ecuaciones no lineales      | Método de bisección                |
-| Ecuaciones no lineales      | Método de la secante               |
-| Ecuaciones no lineales      | Método de Newton-Raphson           |
-| Ecuaciones no lineales      | Método de Falsa Posición           |
-| Ecuaciones no lineales      | Método de Punto Fijo               |
-| Interpolación               | Interpolación de Lagrange          |
-| Interpolación               | Interpolación de Newton            |
-| Interpolación               | Splines cúbicos                    |
-| Integración numérica        | Regla del trapecio                 |
-| Integración numérica        | Método de Simpson (1/3, 3/8)       |
-| Integración numérica        | Cuadratura de Gauss                |
-| Integración numérica        | Gauss-Legendre                     |
-| Derivación numérica         | Diferencias finitas                |
-| EDOs                        | Runge-Kutta 4 (RK4)                |
-| Ajuste de curvas            | Mínimos cuadrados                  |
-
-> Nota: Actualmente en desarrollo.
+Implementar métodos numéricos correctamente (control de tolerancia, manejo de errores de convergencia, registro de iteraciones) toma tiempo y es propenso a errores sutiles. Trazo resuelve esto ofreciendo implementaciones ya probadas, con validación de parámetros y un formato de resultado consistente, para que el desarrollador pueda enfocarse en su aplicación en lugar de en los detalles del algoritmo.
 
 ## Instalación
 
-Clonar el repositorio:
+Una vez publicado en npm:
 
-    git clone https://github.com/sis-inf/trazo.git
-    cd trazo
+```bash
+npm install trazo
+```
+
+Para clonar el repositorio y trabajar directamente con el código fuente:
+
+```bash
+git clone https://github.com/sis-inf/trazo.git
+cd trazo
+npm install
+```
+
+> 👉 Mientras el paquete no esté publicado en npm, los ejemplos de esta guía que usan métodos no expuestos todavía en el punto de entrada (`src/index.js`) deben importarse directamente desde su archivo fuente, como se muestra en la sección "Uso rápido".
 
 ## Uso rápido
 
-Ejemplo básico de uso esperado:
-	import { biseccion } from 'trazo';
-	const f = (x) => x * x - 4;
-	const resultado = biseccion(f, 0, 3, 0.001);
-	console.log("Raíz aproximada:", resultado);
-    
+### Resolver una raíz con bisección
+
+```js
+import { biseccion } from 'trazo';
+
+const resultado = biseccion({
+  f: (x) => x * x - 4,
+  a: 0,
+  b: 3,
+  tolerancia: 0.001,
+  maxIter: 100,
+});
+
+console.log('Raíz aproximada:', resultado.resultado);
+// Raíz aproximada: 2.000...
+```
+
+### Resolver un sistema lineal con Gauss
+
+```js
+import { gauss } from 'trazo';
+
+const A = [
+  [2, 1, -1],
+  [-3, -1, 2],
+  [-2, 1, 2],
+];
+const b = [8, -11, -3];
+
+const resultado = gauss({ A, b });
+
+console.log('Solución:', resultado.resultado);
+// Solución: [2, 3, -1]
+```
+
+### Calcular una integral con la regla del trapecio
+
+```js
+// `trapecio` aún no se reexporta desde src/index.js, por lo que se importa
+// directamente desde su archivo fuente al trabajar con el repositorio clonado.
+import { trapecio } from './src/integracion/trapecio.js';
+
+const resultado = trapecio({
+  f: (x) => x * x,
+  a: 0,
+  b: 1,
+  n: 100,
+});
+
+console.log('Integral aproximada:', resultado.resultado);
+// Integral aproximada: 0.333...
+```
+
+## Estructura del retorno
+
+Todos los métodos de Trazo devuelven un objeto con la misma forma, generado internamente mediante `crearResultado()`:
+
+```js
+{
+  resultado,      // number | Array | null — el valor o vector solución
+  iteraciones,    // Array — registro paso a paso del proceso (vacío si el método no itera)
+  convergio,      // boolean — true si el método alcanzó el criterio de parada
+  mensaje,        // string — mensaje descriptivo del resultado o del error
+  meta: {
+    metodo,       // string — nombre del método ejecutado
+    parametros,   // Object — parámetros de entrada usados
+    tiempo_ms,    // number — tiempo de ejecución en milisegundos (si se midió)
+  },
+}
+```
+
+Este contrato uniforme permite procesar el resultado de cualquier método de la misma manera, sin necesidad de conocer su implementación interna.
+
+## Métodos disponibles
+
+| Categoría | Método | Función |
+|---|---|---|
+| Sistemas lineales | Eliminación de Gauss | `gauss` |
+| Sistemas lineales | Gauss-Jordan | `gaussJordan` |
+| Sistemas lineales | Jacobi | `jacobi` |
+| Sistemas lineales | Gauss-Seidel | `gaussSeidel` |
+| Sistemas lineales | Descomposición LU | `lu` |
+| Ecuaciones no lineales | Bisección | `biseccion` |
+| Ecuaciones no lineales | Falsa posición | `falsaPosicion` |
+| Ecuaciones no lineales | Newton-Raphson | `newtonRaphson` |
+| Ecuaciones no lineales | Secante | `secante` |
+| Ecuaciones no lineales | Punto fijo | `puntoFijo` |
+| Ecuaciones no lineales | Müller | `muller` |
+| Interpolación | Lagrange | `lagrange` |
+| Interpolación | Diferencias divididas de Newton | `newtonDD` |
+| Interpolación | Splines cúbicos | `splines` |
+| Integración numérica | Regla del trapecio | `trapecio` |
+| Integración numérica | Simpson 1/3 | `simpson13` |
+| Integración numérica | Simpson 3/8 | `simpson38` |
+| Ecuaciones diferenciales (EDO) | Euler | `euler` |
+| Ecuaciones diferenciales (EDO) | Euler mejorado (Heun) | `eulerMejorado` |
+| Ecuaciones diferenciales (EDO) | Runge-Kutta 4 | `rungeKutta4` |
+
+> 👉 La columna "Función" indica el nombre exportado por cada módulo. El punto de entrada `src/index.js` está en proceso de reexportar progresivamente todos los métodos; mientras eso ocurre, cualquier método aquí listado puede importarse directamente desde su archivo fuente dentro de `src/<categoria>/`.
+
 ## Documentación
-Ver la carpeta [docs/](docs/)
+
+La documentación detallada de cada método, su fundamento matemático y ejemplos adicionales se encuentra en la carpeta [docs/](docs/).
 
 ## Contribuir
-Ver [CONTRIBUTING.md](CONTRIBUTING.md)
+
+¿Quieres contribuir? Revisa la guía en [CONTRIBUTING.md](CONTRIBUTING.md) para conocer el flujo de trabajo, la convención de ramas y commits, y cómo abrir tu primer Pull Request.
 
 ## Licencia
+
 MIT — ver [LICENSE](LICENSE)
