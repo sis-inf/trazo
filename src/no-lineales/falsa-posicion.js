@@ -24,7 +24,6 @@ export function falsaPosicion({ f, a, b, tolerancia, maxIter }) {
 
     const iteraciones = [];
     let cAnterior = null;
-    let convergio = false;
 
     for (let n = 1; n <= maxIter; n++) {
         const c = (a * fb - b * fa) / (fb - fa);
@@ -47,7 +46,6 @@ export function falsaPosicion({ f, a, b, tolerancia, maxIter }) {
         });
 
         if (Math.abs(fc) < tolerancia || (error !== null && error < tolerancia)) {
-            convergio = true;
             return crearResultado({
                 resultado: c,
                 iteraciones,
