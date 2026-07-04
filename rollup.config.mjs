@@ -3,11 +3,13 @@ export default {
   output: [
     {
       file: 'dist/trazo.cjs.js',
-      format: 'cjs'
+      format: 'cjs',
+      sourcemap: true
     },
     {
       file: 'dist/trazo.esm.js',
-      format: 'esm'
+      format: 'esm',
+      sourcemap: true
     }
   ]
 };
