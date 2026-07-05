@@ -21,7 +21,7 @@
     "format": "prettier --write src/**/*.js tests/**/*.js",
     "format:check": "prettier --check src/**/*.js",
     "typecheck": "tsc -p jsconfig.json --noEmit",
-	"check:circular": "madge --circular --extensions js src/"
+    "check:circular": "madge --circular --extensions js src/"
   },
   "keywords": [
     "numerical-methods",
@@ -44,8 +44,11 @@
   "devDependencies": {
     "eslint": "^8.57.1",
     "jest": "^29.7.0",
+    "madge": "^8.0.0",
     "prettier": "^3.8.3",
-    "rollup": "^4.0.0",
-	"madge": "^8.0.0"
+    "rollup": "^4.0.0"
+  },
+  "dependencies": {
+    "mathjs": "^15.2.0"
   }
 }
