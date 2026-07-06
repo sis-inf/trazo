@@ -5,6 +5,9 @@
   "main": "dist/trazo.cjs.js",
   "module": "dist/trazo.esm.js",
   "type": "module",
+  "bin": {
+    "trazo": "./src/cli/trazo-cli.js"
+  },
   "exports": {
     ".": {
       "require": "./dist/trazo.cjs.js",
