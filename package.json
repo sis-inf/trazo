@@ -5,6 +5,11 @@
   "main": "dist/trazo.cjs.js",
   "module": "dist/trazo.esm.js",
   "type": "module",
+  "files": [
+  "dist",
+  "README.md",
+  "LICENSE"
+  ],
   "bin": {
     "trazo": "./src/cli/trazo-cli.js"
   },
