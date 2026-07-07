@@ -24,7 +24,7 @@
     "build": "rollup -c",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config=\"{\\\"testMatch\\\":[\\\"**/*.test.js\\\"],\\\"passWithNoTests\\\":true}\"",
     "test:watch": "jest --watch tests",
-    "test:cov": "jest --coverage",
+    "test:cov": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "lint": "eslint src tests",
     "format": "prettier --write src/**/*.js tests/**/*.js",
     "format:check": "prettier --check src/**/*.js",
