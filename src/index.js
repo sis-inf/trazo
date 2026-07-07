@@ -64,6 +64,16 @@ import {
   mediana
 } from './utils/estadistica.js';
 
+// Importaciones de generadores de matrices de prueba (issue #651)
+import {
+  matrizIdentidad,
+  matrizHilbert,
+  matrizDiagonalDominante,
+  matrizSimetricaDefinidaPositiva,
+  esDiagonalDominante,
+  esSimetrica,
+} from './utils/generadores_matrices.js';
+
 const lineales = {
   gauss,
   gaussJordan,
@@ -143,6 +153,15 @@ const estadistica = {
   varianza,
   desviacionEstandar,
   mediana
+};
+
+const generadoresMatrices = {
+  matrizIdentidad,
+  matrizHilbert,
+  matrizDiagonalDominante,
+  matrizSimetricaDefinidaPositiva,
+  esDiagonalDominante,
+  esSimetrica,
 };
 
 export {
@@ -226,7 +245,15 @@ export {
   media,
   varianza,
   desviacionEstandar,
-  mediana
+  mediana,
+
+  // generadores de matrices (issue #651)
+  matrizIdentidad,
+  matrizHilbert,
+  matrizDiagonalDominante,
+  matrizSimetricaDefinidaPositiva,
+  esDiagonalDominante,
+  esSimetrica,
 };
 
 export default {
@@ -251,7 +278,8 @@ export default {
   ...diferencias,
   ...matricial,
   ...polinomios,
-  ...estadistica
+  ...estadistica,
+  ...generadoresMatrices
 };
 /**
  * Re-exporta la función pública para cálculo de derivadas.

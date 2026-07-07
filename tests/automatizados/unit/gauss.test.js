@@ -1,5 +1,6 @@
 import { gauss } from '../../../src/lineales/gauss.js';
 import { gaussJordan } from '../../../src/lineales/gauss-jordan.js';
+import { matrizIdentidad } from '../../../src/utils/generadores_matrices.js';
 
 // -------------------------------------------------------------------
 // Eliminación Gaussiana
@@ -67,6 +68,18 @@ describe('Eliminación Gaussiana (gauss)', () => {
     const b = [3, 6];
 
     expect(() => gauss({ A, b })).toThrow();
+  });
+  
+  test('Resuelve sistema con matriz identidad (solución igual a b)', () => {
+    const A = matrizIdentidad(3);
+    const b = [5, -2, 7];
+
+    const res = gauss({ A, b });
+
+    expect(res.convergio).toBe(true);
+    expect(res.resultado[0]).toBeCloseTo(5, 10);
+    expect(res.resultado[1]).toBeCloseTo(-2, 10);
+    expect(res.resultado[2]).toBeCloseTo(7, 10);
   });
 });
 
