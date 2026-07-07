@@ -41,3 +41,14 @@ export class ErrorTamano extends Error {
     this.name = "ErrorTamano";
   }
 }
+
+/**
+ * Error cuando un método iterativo excede el tiempo máximo de ejecución configurado.
+ * @example throw new ErrorTimeout("Bisección excedió el timeout de 500ms después de 42 iteraciones.");
+ */
+export class ErrorTimeout extends Error {
+  constructor(mensaje) {
+    super(mensaje);
+    this.name = "ErrorTimeout";
+  }
+}
