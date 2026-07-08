@@ -140,7 +140,11 @@ Este contrato uniforme permite procesar el resultado de cualquier método de la 
 
 ## Documentación
 
-La documentación detallada de cada método, su fundamento matemático y ejemplos adicionales se encuentra en la carpeta [docs/](docs/).
+La documentación del proyecto se encuentra organizada en la carpeta [docs/](docs/).
+
+Para facilitar la navegación entre todas las guías y referencias disponibles, consulta el **[Índice General de Documentación](docs/indice-general.md)**.
+
+Además del índice, encontrarás documentación sobre arquitectura, métodos numéricos, ejemplos de uso, API, contribución, integración continua y despliegue.
 
 ## Contribuir
 
