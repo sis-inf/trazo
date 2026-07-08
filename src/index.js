@@ -39,6 +39,8 @@ import {
   normaInfinita,
   normaFrobenius
 } from './matricial/norma_matriz.js';
+
+import { calcularNumeroCondicion } from './matricial/numero_condicion.js';
 import {
   sumaMatrices,
   restaMatrices,
@@ -141,7 +143,8 @@ const matricial = {
   restaMatrices,
   multiplicarMatrices,
   transpuesta,
-  multiplicarEscalar
+  multiplicarEscalar,
+  calcularNumeroCondicion
 };
 
 const polinomios = {
@@ -237,6 +240,7 @@ export {
   multiplicarMatrices,
   transpuesta,
   multiplicarEscalar,
+  calcularNumeroCondicion,
 
   // polinomios
   evaluarHorner,
