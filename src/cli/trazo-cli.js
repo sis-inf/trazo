@@ -2,6 +2,7 @@
 
 import { compile } from "mathjs";
 import { biseccion } from "../no-lineales/biseccion.js";
+import { verificarVersion } from "./verificar_version.js";
 
 function parseArgs(argv) {
     const command = argv[0];
@@ -54,7 +55,7 @@ Ejemplo:
   trazo biseccion --f "x^2-4" --a 0 --b 3
 `);
 }
-
+await verificarVersion();
 const { command, args } = parseArgs(process.argv.slice(2));
 
 if (
