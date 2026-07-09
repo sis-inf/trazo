@@ -1,7 +1,7 @@
 // METODO DE NEWTON-RAPHSON
 
 import { crearResultado, medirTiempo } from "../core/contrato.js";
-import { ErrorDominio } from "../core/errores.js";
+import { ErrorDominio, ErrorParametros, ErrorTimeout } from "../core/errores.js";
 import {
   validarFuncion,
   validarNumero,
@@ -18,7 +18,9 @@ import {
  * @param {number} opciones.x0 Aproximación inicial.
  * @param {number} [opciones.tolerancia=1e-6]
  * @param {number} [opciones.maxIter=100]
+ * @param {number|null} [opciones.timeoutMs=null] - Tiempo máximo de ejecución en milisegundos.
  * @returns {Object} Resultado siguiendo el contrato de Trazo.
+ * @throws {ErrorTimeout} Si se excede el tiempo máximo de ejecución configurado.
  */
 function newtonRaphson({
   f,
@@ -26,6 +28,7 @@ function newtonRaphson({
   x0,
   tolerancia = 1e-6,
   maxIter = 100,
+  timeoutMs = null,
 }) {
   validarFuncion(f, "f");
   validarFuncion(df, "df");
@@ -33,12 +36,31 @@ function newtonRaphson({
   validarTolerancia(tolerancia);
   validarIteraciones(maxIter);
 
+  if (timeoutMs !== null) {
+    if (typeof timeoutMs !== "number" || !isFinite(timeoutMs) || timeoutMs <= 0) {
+      throw new ErrorParametros(
+        `Trazo.newtonRaphson: 'timeoutMs' debe ser un número finito mayor a cero o null. Se recibió: ${timeoutMs}.`
+      );
+    }
+  }
+
   const { valor, tiempo_ms } = medirTiempo(() => {
     let x = x0;
     const iteraciones = [];
     let convergio = false;
 
+    const inicio = timeoutMs !== null ? performance.now() : null;
+    const INTERVALO_VERIFICACION = 5;
+
     for (let n = 1; n <= maxIter; n++) {
+      if (timeoutMs !== null && (n - 1) % INTERVALO_VERIFICACION === 0) {
+        if (performance.now() - inicio > timeoutMs) {
+          throw new ErrorTimeout(
+            `Trazo.newtonRaphson: excedió el timeout de ${timeoutMs}ms después de ${n - 1} iteraciones.`
+          );
+        }
+      }
+
       const fx = f(x);
       const dfx = df(x);
 
@@ -88,6 +110,7 @@ function newtonRaphson({
         x0,
         tolerancia,
         maxIter,
+        timeoutMs,
       },
       tiempo_ms,
     },
