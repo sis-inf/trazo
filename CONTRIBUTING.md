@@ -106,10 +106,14 @@ npm test
 npm run format:check
 npm run lint
 ```
-Además, instala los hooks de pre-commit si aún no lo hiciste:
+Los hooks de pre-commit se instalan automáticamente al ejecutar:
 ```bash 
-pre-commit install
+npm install
 ```
+
+gracias al script `prepare` de npm.
+
+Antes de cada commit, el hook de pre-commit ejecutará automáticamente `eslint --fix` y `prettier --write` sobre los archivos preparados (*staged*). Si encuentra errores que no puedan corregirse automáticamente, el commit se detendrá para que puedas revisarlos.
 ---
 ### 8. Sube tu rama a tu fork
 
