@@ -10,8 +10,7 @@ src/
 ├── core/
 ```
 
-Este directorio contiene la implementación de distintos métodos numéricos organizados según la categoría del problema que resuelven.
----
+## Este directorio contiene la implementación de distintos métodos numéricos organizados según la categoría del problema que resuelven.
 
 ## Descripción de Directorios
 
@@ -21,7 +20,7 @@ Métodos de análisis numérico.
 
 Ejemplos:
 
-* Mínimos cuadrados
+- Mínimos cuadrados
 
 ---
 
@@ -31,7 +30,8 @@ Métodos de derivación numérica.
 
 Ejemplos:
 
-* Diferencias finitas
+- Diferencias finitas
+
 ---
 
 ### `integracion/`
@@ -40,9 +40,9 @@ Métodos de integración numérica.
 
 Ejemplos:
 
-* Regla del trapecio
-* Simpson 1/3
-* Simpson 3/8
+- Regla del trapecio
+- Simpson 1/3
+- Simpson 3/8
 
 ---
 
@@ -52,11 +52,11 @@ Métodos para sistemas de ecuaciones lineales.
 
 Ejemplos:
 
-* Gauss
-* Gauss-Jordan
-* LU
-* Jacobi
-* Gauss-Seidel
+- Gauss
+- Gauss-Jordan
+- LU
+- Jacobi
+- Gauss-Seidel
 
 ---
 
@@ -66,9 +66,10 @@ Métodos de interpolación y aproximación.
 
 Ejemplos:
 
-* Lagrange
-* Newton
-* Splines cúbicos
+- Lagrange
+- Newton
+- Splines cúbicos
+
 ---
 
 ### `io/`
@@ -77,8 +78,8 @@ Manejo de entrada y salida de datos.
 
 Ejemplos:
 
-* Formateo de resultados
-* Exportación de datos
+- Formateo de resultados
+- Exportación de datos
 
 ---
 
