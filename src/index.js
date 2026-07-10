@@ -28,6 +28,7 @@ import { splineCubicoNatural } from './interpolacion/spline_cubico.js';
 import { descomposicionCholesky, resolverCholesky } from './lineales/cholesky.js';
 import { det2x2, det3x3 } from './lineales/determinant.js';
 import { gauss } from './lineales/gauss.js';
+import { gaussPivoteoParcial } from './lineales/gauss-pivoteo-parcial.js';
 import { gaussJordan } from './lineales/gauss-jordan.js';
 import { gaussSeidel } from './lineales/gauss-seidel.js';
 import { jacobi } from './lineales/jacobi.js';
@@ -39,6 +40,8 @@ import {
   normaInfinita,
   normaFrobenius
 } from './matricial/norma_matriz.js';
+
+import { calcularNumeroCondicion } from './matricial/numero_condicion.js';
 import {
   sumaMatrices,
   restaMatrices,
@@ -64,8 +67,19 @@ import {
   mediana
 } from './utils/estadistica.js';
 
+// Importaciones de generadores de matrices de prueba (issue #651)
+import {
+  matrizIdentidad,
+  matrizHilbert,
+  matrizDiagonalDominante,
+  matrizSimetricaDefinidaPositiva,
+  esDiagonalDominante,
+  esSimetrica,
+} from './utils/generadores_matrices.js';
+
 const lineales = {
   gauss,
+  gaussPivoteoParcial,
   gaussJordan,
   jacobi,
   gaussSeidel,
@@ -131,7 +145,8 @@ const matricial = {
   restaMatrices,
   multiplicarMatrices,
   transpuesta,
-  multiplicarEscalar
+  multiplicarEscalar,
+  calcularNumeroCondicion
 };
 
 const polinomios = {
@@ -143,6 +158,15 @@ const estadistica = {
   varianza,
   desviacionEstandar,
   mediana
+};
+
+const generadoresMatrices = {
+  matrizIdentidad,
+  matrizHilbert,
+  matrizDiagonalDominante,
+  matrizSimetricaDefinidaPositiva,
+  esDiagonalDominante,
+  esSimetrica,
 };
 
 export {
@@ -158,7 +182,8 @@ export {
   estadistica,
 
   // lineales
-  gauss,
+  gauss, 
+  gaussPivoteoParcial,
   gaussJordan,
   jacobi,
   gaussSeidel,
@@ -218,6 +243,7 @@ export {
   multiplicarMatrices,
   transpuesta,
   multiplicarEscalar,
+  calcularNumeroCondicion,
 
   // polinomios
   evaluarHorner,
@@ -226,7 +252,15 @@ export {
   media,
   varianza,
   desviacionEstandar,
-  mediana
+  mediana,
+
+  // generadores de matrices (issue #651)
+  matrizIdentidad,
+  matrizHilbert,
+  matrizDiagonalDominante,
+  matrizSimetricaDefinidaPositiva,
+  esDiagonalDominante,
+  esSimetrica,
 };
 
 export default {
@@ -251,7 +285,8 @@ export default {
   ...diferencias,
   ...matricial,
   ...polinomios,
-  ...estadistica
+  ...estadistica,
+  ...generadoresMatrices
 };
 /**
  * Re-exporta la función pública para cálculo de derivadas.

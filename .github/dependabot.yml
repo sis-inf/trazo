@@ -2,18 +2,18 @@ version: 2
 
 updates:
 
-* package-ecosystem: "npm"
-  directory: "/"
-  schedule:
-  interval: "weekly"
-  target-branch: "dev"
-  commit-message:
-  prefix: "chore(deps)"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "dev"
+    commit-message:
+      prefix: "chore(deps)"
 
-* package-ecosystem: "github-actions"
-  directory: "/"
-  schedule:
-  interval: "weekly"
-  target-branch: "dev"
-  commit-message:
-  prefix: "chore(deps)"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "dev"
+    commit-message:
+      prefix: "chore(deps)"

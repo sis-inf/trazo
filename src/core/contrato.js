@@ -7,6 +7,7 @@
  * @param {boolean} [opciones.convergio=false]
  * @param {string}  [opciones.mensaje=""]
  * @param {Object}  [opciones.meta={}]
+ * @param {string[]} [opciones.warnings=[]] - Advertencias no bloqueantes sobre situaciones límite.
  * @returns {Object}
  */
 function crearResultado({
@@ -15,8 +16,9 @@ function crearResultado({
   convergio = false,
   mensaje = "",
   meta = {},
+  warnings = [],
 }) {
-  return {
+  const resultadoBase = {
     resultado,
     iteraciones,
     convergio,
@@ -27,6 +29,12 @@ function crearResultado({
       tiempo_ms:  meta.tiempo_ms  ?? 0,
     },
   };
+
+  if (warnings.length > 0) {
+    resultadoBase.warnings = warnings;
+  }
+
+  return resultadoBase;
 }
  
 /**

@@ -1,0 +1,57 @@
+ <!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Playground Trazo</title>
+  <link rel="stylesheet" href="./playground.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="eyebrow">Trazo Playground</p>
+      <h1>Prueba métodos numéricos en el navegador</h1>
+      <p>
+        Ejecuta métodos representativos de Trazo directamente desde el navegador,
+        sin instalar dependencias ni levantar un servidor.
+      </p>
+      <p>
+        Este playground carga el bundle local <code>../dist/trazo.umd.js</code>.
+      </p>
+      <p id="bundle-status" class="status">Verificando bundle UMD...</p>
+    </section>
+
+    <section class="panel">
+      <div class="field">
+        <label for="method-select">Método</label>
+        <select id="method-select"></select>
+      </div>
+
+      <p id="method-description" class="description"></p>
+
+      <form id="param-form" class="form"></form>
+
+      <div class="actions">
+        <button id="run-button" type="button">Ejecutar</button>
+        <button id="example-button" type="button" class="secondary">Cargar ejemplo</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Resultado</h2>
+      <pre id="raw-output" class="output">Ejecuta un método para ver el resultado.</pre>
+
+      <h2>Tabla de iteraciones</h2>
+      <div class="table-wrapper">
+        <table id="result-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../dist/trazo.umd.js"></script>
+  <script src="./playground.js"></script>
+</body>
+</html>

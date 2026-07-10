@@ -1,22 +1,22 @@
-# CODEOWNERS - Assign reviewers by module
+# CODEOWNERS - Asignación automática de revisores por módulo
 
-# Linear equations methods
-src/lineales/ @erwinsaul
+# Métodos de ecuaciones lineales
+src/lineales/ @deviamamani
 
-# Non-linear equations methods
-src/no-lineales/ @erwinsaul
+# Métodos de ecuaciones no lineales
+src/no-lineales/ @deviamamani
 
-# Integration methods
-src/integracion/ @erwinsaul
+# Métodos de integración
+src/integracion/ @deviamamani
 
-# Interpolation methods
-src/interpolacion/ @erwinsaul
+# Métodos de interpolación
+src/interpolacion/ @deviamamani
 
-# Ordinary differential equations
-src/edo/ @erwinsaul
+# Métodos de ecuaciones diferenciales ordinarias
+src/edo/ @deviamamani
 
-# Documentation
-docs/ @erwinsaul
+# Documentación
+docs/ @deviamamani
 
-# Fallback - administrator
-* @erwinsaul
+# Owner por defecto del repositorio
+* @deviamamani

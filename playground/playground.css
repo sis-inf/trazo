@@ -1,0 +1,181 @@
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #182033;
+  --muted: #657089;
+  --border: #d9deea;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --danger: #b91c1c;
+  --success: #166534;
+  --code: #eef2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.app {
+  width: min(1100px, calc(100% - 32px));
+  margin: 32px auto;
+}
+
+.hero,
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 24px rgba(20, 30, 55, 0.08);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+h1,
+h2 {
+  margin-top: 0;
+}
+
+code {
+  background: var(--code);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.status {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #eef2ff;
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.status.error {
+  background: #fee2e2;
+  color: var(--danger);
+}
+
+.status.ok {
+  background: #dcfce7;
+  color: var(--success);
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+  font-family: Consolas, Monaco, monospace;
+}
+
+.description {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.form .field.wide {
+  grid-column: 1 / -1;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 11px 18px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+button.secondary {
+  background: #475569;
+}
+
+.output {
+  background: #101827;
+  color: #e5edff;
+  padding: 16px;
+  border-radius: 12px;
+  overflow: auto;
+  min-height: 90px;
+}
+
+.table-wrapper {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #eef2ff;
+}
+
+@media (max-width: 720px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+}
