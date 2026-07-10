@@ -28,6 +28,7 @@ import { splineCubicoNatural } from './interpolacion/spline_cubico.js';
 import { descomposicionCholesky, resolverCholesky } from './lineales/cholesky.js';
 import { det2x2, det3x3 } from './lineales/determinant.js';
 import { gauss } from './lineales/gauss.js';
+import { gaussPivoteoParcial } from './lineales/gauss-pivoteo-parcial.js';
 import { gaussJordan } from './lineales/gauss-jordan.js';
 import { gaussSeidel } from './lineales/gauss-seidel.js';
 import { jacobi } from './lineales/jacobi.js';
@@ -78,6 +79,7 @@ import {
 
 const lineales = {
   gauss,
+  gaussPivoteoParcial,
   gaussJordan,
   jacobi,
   gaussSeidel,
@@ -180,7 +182,8 @@ export {
   estadistica,
 
   // lineales
-  gauss,
+  gauss, 
+  gaussPivoteoParcial,
   gaussJordan,
   jacobi,
   gaussSeidel,
