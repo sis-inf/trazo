@@ -7,6 +7,7 @@ import {
   validarNumero,
   validarTolerancia,
   validarIteraciones,
+  verificarDivergencia,
 } from "../utils/validaciones.js";
 
 /**
@@ -19,6 +20,7 @@ import {
  * @param {number} [opciones.tolerancia=1e-6]
  * @param {number} [opciones.maxIter=100]
  * @returns {Object} Resultado siguiendo el contrato de Trazo.
+ * @throws {ErrorDivergencia} Si los valores se vuelven NaN o Infinity durante la iteración.
  */
 function newtonRaphson({
   f,
@@ -49,6 +51,10 @@ function newtonRaphson({
       }
 
       const siguiente = x - fx / dfx;
+
+      // Verificar divergencia numérica inmediatamente después del cálculo
+      verificarDivergencia(siguiente, "newtonRaphson", n);
+
       const error = Math.abs(siguiente - x);
 
       iteraciones.push({
