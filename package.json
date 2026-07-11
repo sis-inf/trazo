@@ -27,7 +27,7 @@
     "test:cov": "jest --coverage",
     "lint": "eslint src tests",
     "format": "prettier --write src/**/*.js tests/**/*.js",
-    "format:check": "prettier --check src/**/*.js",
+    "format:check": "prettier --check src tests",
     "typecheck": "tsc -p jsconfig.json --noEmit",
     "check:circular": "madge --circular --extensions js src/"
   },
