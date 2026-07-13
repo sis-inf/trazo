@@ -82,7 +82,6 @@ Cada entrada incluye un enlace relativo al documento correspondiente y una breve
 - [metodos.md](metodos.md) — Resume los métodos numéricos del proyecto.
 - [metodos-implementados.md](metodos-implementados.md) — Lista los métodos actualmente implementados.
 - [numeros-complejos.md](numeros-complejos.md) — Explica el soporte y uso de números complejos.
-- [glosario-metodos-numericos.md](glosario-metodos-numericos.md) — Define términos relacionados con métodos numéricos.
 - [preguntas-frecuentes-matematicas.md](preguntas-frecuentes-matematicas.md) — Responde dudas frecuentes sobre conceptos matemáticos.
 
 ---
@@ -102,7 +101,7 @@ Cada entrada incluye un enlace relativo al documento correspondiente y una breve
 - [estilo-commits.md](estilo-commits.md) — Define convenciones para escribir commits.
 - [referencias.md](referencias.md) — Reúne referencias utilizadas en la documentación.
 - [glosario.md](glosario.md) — Define términos generales usados en el proyecto.
-- [glosario-ingles-espanol.md](glosario-ingles-espanol.md) — Presenta un glosario bilingüe inglés-español de términos utilizados en el proyecto.
+- [glosario.md](glosario.md) — Define términos generales y de métodos numéricos usados en el proyecto.
 - [migracion-mayor-version.md](migracion-mayor-version.md) — Documenta consideraciones para migraciones de versión mayor.
 
 ---
