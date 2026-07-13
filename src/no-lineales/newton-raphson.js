@@ -7,6 +7,7 @@ import {
   validarNumero,
   validarTolerancia,
   validarIteraciones,
+  verificarDivergencia,
 } from "../utils/validaciones.js";
 
 /**
@@ -21,6 +22,7 @@ import {
  * @param {number|null} [opciones.timeoutMs=null] - Tiempo máximo de ejecución en milisegundos.
  * @returns {Object} Resultado siguiendo el contrato de Trazo.
  * @throws {ErrorTimeout} Si se excede el tiempo máximo de ejecución configurado.
+ * @throws {ErrorDivergencia} Si los valores se vuelven NaN o Infinity durante la iteración.
  */
 function newtonRaphson({
   f,
@@ -71,6 +73,10 @@ function newtonRaphson({
       }
 
       const siguiente = x - fx / dfx;
+
+      // Verificar divergencia numérica inmediatamente después del cálculo
+      verificarDivergencia(siguiente, "newtonRaphson", n);
+
       const error = Math.abs(siguiente - x);
 
       iteraciones.push({

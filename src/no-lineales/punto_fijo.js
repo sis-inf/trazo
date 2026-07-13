@@ -16,6 +16,7 @@
  *     error: number
  *   }>
  * }} Objeto con la raíz aproximada, número de iteraciones, estado de convergencia y tabla del proceso.
+ * @throws {ErrorDivergencia} Si g(x) produce NaN o Infinity durante la iteración.
  */
 function puntoFijo(g, x0, tolerancia, maxIteraciones) {
   let x = x0;
@@ -24,6 +25,16 @@ function puntoFijo(g, x0, tolerancia, maxIteraciones) {
 
   for (let iteracion = 1; iteracion <= maxIteraciones; iteracion++) {
     const gx = g(x);
+
+    // Verificar divergencia numérica inmediatamente después de evaluar g(x)
+    if (typeof gx !== "number" || Number.isNaN(gx) || !isFinite(gx)) {
+      throw new ErrorDivergencia(
+        `Trazo.puntoFijo: divergencia numérica detectada en la iteración ${iteracion}. ` +
+        `g(x) = ${gx}, lo cual indica que el método no converge numéricamente ` +
+        `para los parámetros dados.`
+      );
+    }
+
     const error = Math.abs(gx - x);
 
     tabla.push({
