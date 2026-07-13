@@ -6,9 +6,9 @@
   "module": "dist/trazo.esm.js",
   "type": "module",
   "files": [
-  "dist",
-  "README.md",
-  "LICENSE"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "bin": {
     "trazo": "./src/cli/trazo-cli.js"
@@ -29,7 +29,8 @@
     "format": "prettier --write src/**/*.js tests/**/*.js",
     "format:check": "prettier --check src tests",
     "typecheck": "tsc -p jsconfig.json --noEmit",
-    "check:circular": "madge --circular --extensions js src/"
+    "check:circular": "madge --circular --extensions js src/",
+    "prepare": "husky"
   },
   "keywords": [
     "numerical-methods",
@@ -51,12 +52,20 @@
   },
   "devDependencies": {
     "eslint": "^8.57.1",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
+    "lint-staged": "^17.0.8",
     "madge": "^8.0.0",
     "prettier": "^3.8.3",
     "rollup": "^4.0.0"
   },
   "dependencies": {
     "mathjs": "^15.2.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
