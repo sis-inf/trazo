@@ -562,3 +562,7 @@ export {
  * Re-exporta el generador de reportes en Markdown.
  */
 export { exportarMarkdown } from './io/exportar_markdown.js';
+/**
+ * Re-exporta la utilidad opcional para memoizar funciones costosas.
+ */
+export { memoizarFuncion } from './utils/memoizar.js';
