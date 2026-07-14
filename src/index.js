@@ -42,6 +42,7 @@ import {
 } from './matricial/norma_matriz.js';
 
 import { calcularNumeroCondicion } from './matricial/numero_condicion.js';
+import { calcularRango } from './matricial/rango.js';
 import {
   sumaMatrices,
   restaMatrices,
@@ -146,7 +147,8 @@ const matricial = {
   multiplicarMatrices,
   transpuesta,
   multiplicarEscalar,
-  calcularNumeroCondicion
+  calcularNumeroCondicion,
+  calcularRango
 };
 
 const polinomios = {
@@ -244,6 +246,7 @@ export {
   transpuesta,
   multiplicarEscalar,
   calcularNumeroCondicion,
+  calcularRango,
 
   // polinomios
   evaluarHorner,
