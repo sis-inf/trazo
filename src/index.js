@@ -17,6 +17,7 @@ import { simpson38 } from './integracion/simpson-38.js';
 import { simpsonCompuesto } from './integracion/simpson_compuesto.js';
 import { simpsonAdaptativo } from './integracion/simpson_adaptativo.js';
 import { trapecio } from './integracion/trapecio.js';
+import { romberg } from './integracion/romberg.js';
 import { integracionMonteCarlo } from './integracion/monte_carlo.js';
 
 import { lagrange } from './interpolacion/lagrange.js';
@@ -117,6 +118,7 @@ const integracion = {
   derivative,
   simpsonCompuesto,
   simpsonAdaptativo,
+  romberg,
   integracionMonteCarlo
 };
 
@@ -218,6 +220,7 @@ export {
   derivative,
   simpsonCompuesto,
   simpsonAdaptativo,
+  romberg,
   integracionMonteCarlo,
 
   // edo
@@ -309,6 +312,10 @@ export { simpson38 } from './integracion/simpson-38.js';
 
 /**
  * Re-exporta la función pública para interpolación de Lagrange.
+ */
+export { romberg } from './integracion/romberg.js';
+/**
+ * Re-exporta la función pública para Integracion Romberg.
  */
 export { lagrange } from './interpolacion/lagrange.js';
 
