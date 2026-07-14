@@ -69,3 +69,12 @@
     ]
   }
 }
+
+"peerDependencies": {
+  "decimal.js": ">=10.0.0"
+},
+"peerDependenciesMeta": {
+  "decimal.js": {
+    "optional": true
+  }
+}
