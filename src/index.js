@@ -225,20 +225,13 @@ export {
   metodHeun,
   metodoPuntoMedio,
 
-  // analisis
-  regresionLineal,
-  regresionPolinomial,
-
+ 
   // diferencias
   diferenciaCentrada,
   diferenciaCentradaSegundaDerivada,
   diferenciasAdelanteGrado1,
 
   // matricial
-  determinanteSarrus,
-  normaEuclideana,
-  normaInfinita,
-  normaFrobenius,
   sumaMatrices,
   restaMatrices,
   multiplicarMatrices,
@@ -247,7 +240,7 @@ export {
   calcularNumeroCondicion,
 
   // polinomios
-  evaluarHorner,
+  
 
   // estadistica (issue #659)
   media,
@@ -562,3 +555,35 @@ export {
  * Re-exporta el generador de reportes en Markdown.
  */
 export { exportarMarkdown } from './io/exportar_markdown.js';
+
+/**
+ * Re-exporta los métodos públicos de análisis de datos.
+ */
+export {
+  regresionLineal,
+  regresionPolinomial,
+} from './analisis/ajuste_minimos_cuadrados.js';
+
+/**
+ * Re-exporta la regla de Sarrus para determinantes 3x3.
+ *
+ * Nota: `det2x2` y `det3x3` se exportan desde `lineales/determinant.js`
+ * como funciones generales de determinante para matrices pequeñas, mientras
+ * que `determinanteSarrus` documenta explícitamente el cálculo de matrices
+ * 3x3 mediante la regla de Sarrus.
+ */
+export { determinanteSarrus } from './matricial/determinante_sarrus.js';
+
+/**
+ * Re-exporta las normas públicas de matriz.
+ */
+export {
+  normaEuclideana,
+  normaInfinita,
+  normaFrobenius,
+} from './matricial/norma_matriz.js';
+
+/**
+ * Re-exporta la evaluación de polinomios mediante el esquema de Horner.
+ */
+export { evaluarHorner } from './polinomios/horner.js';
