@@ -1,9 +1,39 @@
+import { writeFileSync } from 'node:fs';
+
+function formatearValorCSV(valor, separador, precision) {
+  if (valor === null || valor === undefined) {
+    return '';
+  }
+
+  const valorFormateado =
+    typeof valor === 'number' ? Number(valor.toFixed(precision)) : valor;
+
+  const texto = String(valorFormateado);
+  const requiereEscape =
+    texto.includes(separador) ||
+    texto.includes('"') ||
+    texto.includes('\n') ||
+    texto.includes('\r');
+
+  if (!requiereEscape) {
+    return texto;
+  }
+
+  return `"${texto.replace(/"/g, '""')}"`;
+}
+
+/**
+ * Convierte una tabla de objetos a formato CSV.
+ *
+ * @param {Object[]} tabla - Filas a exportar.
+ * @param {Object} opciones - Opciones de exportación.
+ * @param {string} opciones.separador - Separador de columnas.
+ * @param {boolean} opciones.encabezado - Indica si se incluye encabezado.
+ * @param {number} opciones.precision - Decimales para valores numéricos.
+ * @returns {string} Contenido CSV generado.
+ */
 export function exportarCSV(tabla, opciones = {}) {
-  const {
-    separador = ',',
-    encabezado = true,
-    precision = 6
-  } = opciones;
+  const { separador = ',', encabezado = true, precision = 6 } = opciones;
 
   if (!Array.isArray(tabla) || tabla.length === 0) {
     return '';
@@ -17,15 +47,9 @@ export function exportarCSV(tabla, opciones = {}) {
   }
 
   for (const fila of tabla) {
-    const valores = columnas.map((columna) => {
-      const valor = fila[columna];
-
-      if (typeof valor === 'number') {
-        return Number(valor.toFixed(precision));
-      }
-
-      return valor;
-    });
+    const valores = columnas.map((columna) =>
+      formatearValorCSV(fila[columna], separador, precision)
+    );
 
     lineas.push(valores.join(separador));
   }
@@ -33,12 +57,28 @@ export function exportarCSV(tabla, opciones = {}) {
   return lineas.join('\n');
 }
 
+/**
+ * Exporta una tabla a un archivo CSV.
+ *
+ * Compatibilidad con Deno:
+ * este módulo utiliza el especificador `node:fs`, compatible con Node.js y con
+ * la capa de compatibilidad de Deno. No requiere import map, pero en Deno la
+ * escritura de archivos requiere ejecutar con permisos, por ejemplo:
+ * `deno run --allow-write archivo.js`.
+ *
+ * @param {Object[]} tabla - Filas a exportar.
+ * @param {string} ruta - Ruta del archivo destino.
+ * @param {Object} opciones - Opciones de exportación.
+ * @returns {string} Contenido CSV generado.
+ */
 export function exportarCSVArchivo(tabla, ruta, opciones = {}) {
-  const fs = require('fs');
+  if (typeof ruta !== 'string' || ruta.length === 0) {
+    throw new Error('La ruta del archivo CSV debe ser una cadena no vacía');
+  }
 
   const contenido = exportarCSV(tabla, opciones);
 
-  fs.writeFileSync(ruta, contenido, 'utf8');
+  writeFileSync(ruta, contenido, 'utf8');
 
   return contenido;
 }
