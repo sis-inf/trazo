@@ -426,3 +426,10 @@
   renderFields();
   updateBundleStatus();
 })();
+
+(function cargarComparacionLadoALado() {
+  const script = document.createElement('script');
+  script.src = './comparacion.js';
+  script.defer = true;
+  document.body.appendChild(script);
+})();
