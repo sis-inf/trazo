@@ -1,8 +1,3 @@
-661
-
-
-src/utils/parser_expresiones.js:
-
 /**
  * parser_expresiones.js
  * Trazo — Librería de Métodos Numéricos
