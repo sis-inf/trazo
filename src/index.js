@@ -15,6 +15,7 @@ import { derivative } from './integracion/derivative.js';
 import { simpson13 } from './integracion/simpson-13.js';
 import { simpson38 } from './integracion/simpson-38.js';
 import { simpsonCompuesto } from './integracion/simpson_compuesto.js';
+import { simpsonAdaptativo } from './integracion/simpson_adaptativo.js';
 import { trapecio } from './integracion/trapecio.js';
 import { integracionMonteCarlo } from './integracion/monte_carlo.js';
 
@@ -114,6 +115,7 @@ const integracion = {
   simpson38,
   derivative,
   simpsonCompuesto,
+  simpsonAdaptativo,
   integracionMonteCarlo
 };
 
@@ -209,12 +211,13 @@ export {
   polyEval,
   splineCubicoNatural,
 
-  // integracion
+   // integracion
   trapecio,
   simpson13,
   simpson38,
   derivative,
   simpsonCompuesto,
+  simpsonAdaptativo,
   integracionMonteCarlo,
 
   // edo
