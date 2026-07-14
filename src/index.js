@@ -201,10 +201,8 @@ export {
   puntoFijo,
   muller,
 
-  // interpolacion
+   // interpolacion
   lagrange,
-  newtonDD,
-  splines,
   linearInterpolation,
   polyEval,
   splineCubicoNatural,
@@ -312,6 +310,15 @@ export { lagrange } from './interpolacion/lagrange.js';
  * Re-exporta la función pública para interpolación lineal.
  */
 export { linearInterpolation } from './interpolacion/linear.js';
+/**
+ * Re-exporta la función pública para interpolación de Newton por diferencias divididas.
+ */
+export { newtonDD } from './interpolacion/newton-dd.js';
+
+/**
+ * Re-exporta la implementación pública consolidada de splines cúbicos.
+ */
+export { splines } from './interpolacion/splines.js';
 
 /**
  * Re-exporta el método público de eliminación de Gauss.
