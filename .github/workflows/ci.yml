@@ -2,9 +2,9 @@ name: CI JavaScript
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [main, dev]
   pull_request:
-    branches: [ main, dev ]
+    branches: [main, dev]
 
 jobs:
   test:
@@ -24,6 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Verify package-lock.json is in sync
         run: |
           npm install --package-lock-only
@@ -31,6 +32,7 @@ jobs:
             echo "package-lock.json desincronizado, ejecuta npm install localmente y commitea el resultado"
             exit 1
           )
+
       - name: Install dependencies
         run: npm install
 
@@ -39,9 +41,69 @@ jobs:
 
       - name: Check code formatting
         run: npm run format:check
-      
+
       - name: Check circular dependencies
         run: npm run check:circular
 
       - name: Run tests
         run: npm test
+
+  deno:
+    name: Deno compatibility
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Verify pure calculation methods in Deno
+        run: |
+          cat > deno-compat-check.mjs <<'EOF'
+          import { det2x2, det3x3 } from './src/lineales/determinant.js';
+          import {
+            sumaMatrices,
+            multiplicarMatrices,
+            transpuesta
+          } from './src/matricial/algebra_matrices.js';
+
+          function assertEqual(actual, expected, label) {
+            const actualJson = JSON.stringify(actual);
+            const expectedJson = JSON.stringify(expected);
+
+            if (actualJson !== expectedJson) {
+              throw new Error(`${label}: esperado ${expectedJson}, recibido ${actualJson}`);
+            }
+          }
+
+          assertEqual(det2x2([[1, 2], [3, 4]]), -2, 'det2x2');
+          assertEqual(det3x3([[1, 2, 3], [0, 1, 4], [5, 6, 0]]), 1, 'det3x3');
+
+          assertEqual(
+            sumaMatrices([[1, 2], [3, 4]], [[5, 6], [7, 8]]),
+            [[6, 8], [10, 12]],
+            'sumaMatrices'
+          );
+
+          assertEqual(
+            multiplicarMatrices([[1, 2], [3, 4]], [[2, 0], [1, 2]]),
+            [[4, 4], [10, 8]],
+            'multiplicarMatrices'
+          );
+
+          assertEqual(
+            transpuesta([[1, 2, 3], [4, 5, 6]]),
+            [[1, 4], [2, 5], [3, 6]],
+            'transpuesta'
+          );
+
+          console.log('Compatibilidad con Deno verificada para métodos de cálculo puro.');
+          console.log('Los módulos de io/ usan node:fs y requieren permisos de escritura en Deno.');
+          EOF
+
+          deno run --allow-read deno-compat-check.mjs
+          rm deno-compat-check.mjs
