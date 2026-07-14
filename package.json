@@ -69,3 +69,6 @@
     ]
   }
 }
+"dependencies": {
+  "mathjs": "^13.0.0"
+}
