@@ -547,3 +547,8 @@ export {
   conjugadoComplejo,
   divisionComplejos,
 } from './utils/numeros_complejos.js';
+
+/**
+ * Re-exporta el generador de reportes en Markdown.
+ */
+export { exportarMarkdown } from './io/exportar_markdown.js';
