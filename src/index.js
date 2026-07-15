@@ -1254,4 +1254,10 @@ export {
   magnitudVector,
   normalizarVector,
   escalarPorVector,
-} from './utils/algebra_vectores.js';
+  from './utils/algebra_vectores.js';
+}
+
+/**
+ * Re-exporta la interpolación de Hermite.
+ */
+export { hermite } from './interpolacion/hermite.js';
