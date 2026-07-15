@@ -1255,3 +1255,8 @@ export {
   normalizarVector,
   escalarPorVector,
 } from './utils/algebra_vectores.js';
+
+/**
+ * Re-exporta el método de Brent para raíces no lineales.
+ */
+export { brent } from './no-lineales/brent.js';
