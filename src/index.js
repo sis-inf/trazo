@@ -1243,3 +1243,15 @@ export const noLineales = {
  * Re-exporta el generador de números pseudoaleatorios con semilla reproducible.
  */
 export { crearGeneradorAleatorio } from './utils/prng.js';
+/**
+ * Re-exporta las utilidades básicas de álgebra de vectores.
+ */
+export {
+  sumaVectores,
+  restaVectores,
+  productoPunto,
+  productoCruz,
+  magnitudVector,
+  normalizarVector,
+  escalarPorVector,
+} from './utils/algebra_vectores.js';
