@@ -1255,3 +1255,8 @@ export {
   normalizarVector,
   escalarPorVector,
 } from './utils/algebra_vectores.js';
+
+/**
+ * Re-exporta el cálculo de matriz inversa mediante Gauss-Jordan.
+ */
+export { calcularInversa } from './lineales/inversa.js';
