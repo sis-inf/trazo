@@ -15,9 +15,7 @@ import { derivative } from './integracion/derivative.js';
 import { simpson13 } from './integracion/simpson-13.js';
 import { simpson38 } from './integracion/simpson-38.js';
 import { simpsonCompuesto } from './integracion/simpson_compuesto.js';
-import { simpsonAdaptativo } from './integracion/simpson_adaptativo.js';
 import { trapecio } from './integracion/trapecio.js';
-import { romberg } from './integracion/romberg.js';
 import { integracionMonteCarlo } from './integracion/monte_carlo.js';
 
 import { lagrange } from './interpolacion/lagrange.js';
@@ -44,7 +42,6 @@ import {
 } from './matricial/norma_matriz.js';
 
 import { calcularNumeroCondicion } from './matricial/numero_condicion.js';
-import { calcularRango } from './matricial/rango.js';
 import {
   sumaMatrices,
   restaMatrices,
@@ -117,8 +114,6 @@ const integracion = {
   simpson38,
   derivative,
   simpsonCompuesto,
-  simpsonAdaptativo,
-  romberg,
   integracionMonteCarlo
 };
 
@@ -151,8 +146,7 @@ const matricial = {
   multiplicarMatrices,
   transpuesta,
   multiplicarEscalar,
-  calcularNumeroCondicion,
-  calcularRango
+  calcularNumeroCondicion
 };
 
 const polinomios = {
@@ -207,20 +201,20 @@ export {
   puntoFijo,
   muller,
 
-   // interpolacion
+  // interpolacion
   lagrange,
+  newtonDD,
+  splines,
   linearInterpolation,
   polyEval,
   splineCubicoNatural,
 
-   // integracion
+  // integracion
   trapecio,
   simpson13,
   simpson38,
   derivative,
   simpsonCompuesto,
-  simpsonAdaptativo,
-  romberg,
   integracionMonteCarlo,
 
   // edo
@@ -250,7 +244,6 @@ export {
   transpuesta,
   multiplicarEscalar,
   calcularNumeroCondicion,
-  calcularRango,
 
   // polinomios
   evaluarHorner,
@@ -313,25 +306,12 @@ export { simpson38 } from './integracion/simpson-38.js';
 /**
  * Re-exporta la función pública para interpolación de Lagrange.
  */
-export { romberg } from './integracion/romberg.js';
-/**
- * Re-exporta la función pública para Integracion Romberg.
- */
 export { lagrange } from './interpolacion/lagrange.js';
 
 /**
  * Re-exporta la función pública para interpolación lineal.
  */
 export { linearInterpolation } from './interpolacion/linear.js';
-/**
- * Re-exporta la función pública para interpolación de Newton por diferencias divididas.
- */
-export { newtonDD } from './interpolacion/newton-dd.js';
-
-/**
- * Re-exporta la implementación pública consolidada de splines cúbicos.
- */
-export { splines } from './interpolacion/splines.js';
 
 /**
  * Re-exporta el método público de eliminación de Gauss.
@@ -573,6 +553,69 @@ export {
  */
 export { exportarMarkdown } from './io/exportar_markdown.js';
 /**
- * Re-exporta la utilidad opcional para memoizar funciones costosas.
+ * Re-exporta la función pública para cálculo de derivadas.
  */
-export { memoizarFuncion } from './utils/memoizar.js';
+export { derivative } from './integracion/derivative.js';
+
+/**
+ * Re-exporta el método público de integración Simpson 1/3.
+ */
+export { simpson13 } from './integracion/simpson-13.js';
+
+/**
+ * Re-exporta el método público de integración Simpson 3/8.
+ */
+export { simpson38 } from './integracion/simpson-38.js';
+
+/**
+ * Re-exporta la función pública para interpolación de Lagrange.
+ */
+export { lagrange } from './interpolacion/lagrange.js';
+
+/**
+ * Re-exporta la función pública para interpolación lineal.
+ */
+export { linearInterpolation } from './interpolacion/linear.js';
+
+/**
+ * Re-exporta el método público de eliminación de Gauss.
+ */
+export { gauss } from './lineales/gauss.js';
+
+/**
+ * Re-exporta el método público de Jacobi.
+ */
+export { jacobi } from './lineales/jacobi.js';
+
+/**
+ * Re-exporta la función pública para determinantes de matrices 2x2.
+ */
+export { det2x2 } from './lineales/determinant.js';
+
+/**
+ * Re-exporta la función pública para determinantes de matrices 3x3.
+ */
+export { det3x3 } from './lineales/determinant.js';
+
+/**
+ * Re-exporta la función pública para evaluación de polinomios.
+ */
+export { polyEval } from './interpolacion/polyEval.js';
+
+/**
+ * Re-exporta el método público de Newton-Raphson.
+ */
+export { newtonRaphson } from './no-lineales/newton-raphson.js';
+/**
+
+* Agrupador para métodos no lineales.
+ */
+import { biseccion } from './no-lineales/biseccion.js';
+export { biseccion };
+export const noLineales = {
+  biseccion
+};
+/**
+ * Re-exporta el método de integración Monte Carlo multidimensional.
+ */
+export { integracionMonteCarlo } from './integracion/monte_carlo.js';
