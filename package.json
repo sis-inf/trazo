@@ -5,6 +5,7 @@
   "main": "dist/trazo.cjs.js",
   "module": "dist/trazo.esm.js",
   "type": "module",
+  "sideEffects": false,
   "files": [
     "dist",
     "README.md",
