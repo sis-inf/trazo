@@ -18,7 +18,6 @@ Cada entrada incluye un enlace relativo al documento correspondiente y una breve
 - [estandares-codigo.md](estandares-codigo.md) — Define lineamientos de estilo y calidad para el código fuente.
 - [convenciones-nombres-funciones.md](convenciones-nombres-funciones.md) — Establece criterios de nombres para funciones y módulos.
 - [precision-y-errores.md](precision-y-errores.md) — Explica el manejo de precisión numérica y errores computacionales.
-- [precision-flotante.md](precision-flotante.md) — Describe consideraciones sobre aritmética de punto flotante.
 - [precision-y-tolerancias-recomendadas.md](precision-y-tolerancias-recomendadas.md) — Recomienda tolerancias numéricas para distintos métodos.
 - [limitaciones.md](limitaciones.md) — Resume limitaciones generales conocidas del proyecto.
 - [limitaciones-numericas.md](limitaciones-numericas.md) — Explica limitaciones específicas de los métodos numéricos.
