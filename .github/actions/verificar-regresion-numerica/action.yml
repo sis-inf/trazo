@@ -1,0 +1,211 @@
+name: Verificar regresión numérica
+description: Ejecuta casos de referencia de alta precisión para detectar regresiones numéricas.
+
+runs:
+  using: composite
+  steps:
+    - name: Ejecutar verificación de regresión numérica
+      shell: bash
+      run: |
+        node --input-type=module <<'NODE'
+        import { readFile } from 'node:fs/promises';
+        import * as Trazo from './src/index.js';
+
+        const rutaCasos = './tests/datos/esperados/casos_referencia.json';
+        const casos = JSON.parse(await readFile(rutaCasos, 'utf8'));
+
+        function crearFuncion(expresion) {
+          return new Function('x', `return ${expresion};`);
+        }
+
+        function extraerResultado(valor) {
+          if (valor && typeof valor === 'object' && 'resultado' in valor) {
+            return valor.resultado;
+          }
+
+          if (valor && typeof valor === 'object' && 'valor' in valor) {
+            return valor.valor;
+          }
+
+          return valor;
+        }
+
+        function maxDiferencia(actual, esperado) {
+          if (Array.isArray(actual) && Array.isArray(esperado)) {
+            let maximo = 0;
+
+            for (let i = 0; i < esperado.length; i++) {
+              maximo = Math.max(maximo, maxDiferencia(actual[i], esperado[i]));
+            }
+
+            return maximo;
+          }
+
+          return Math.abs(Number(actual) - Number(esperado));
+        }
+
+        function ejecutarConCandidatos(nombre, candidatos) {
+          let ultimoError;
+
+          for (const candidato of candidatos) {
+            try {
+              return candidato();
+            } catch (error) {
+              ultimoError = error;
+            }
+          }
+
+          throw new Error(`${nombre}: no se pudo ejecutar ningún formato de parámetros. Último error: ${ultimoError.message}`);
+        }
+
+        function ejecutarCaso(caso) {
+          const f = caso.f ? crearFuncion(caso.f) : null;
+          const df = caso.df ? crearFuncion(caso.df) : null;
+
+          switch (caso.metodo) {
+            case 'biseccion':
+              return Trazo.biseccion({
+                f,
+                a: caso.a,
+                b: caso.b,
+                tolerancia: caso.tolerancia,
+                maxIter: caso.maxIter,
+              });
+
+            case 'falsaPosicion':
+              return Trazo.falsaPosicion({
+                f,
+                a: caso.a,
+                b: caso.b,
+                tolerancia: caso.tolerancia,
+                maxIter: caso.maxIter,
+              });
+
+            case 'newtonRaphson':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.newtonRaphson({
+                  f,
+                  df,
+                  x0: caso.x0,
+                  tolerancia: caso.tolerancia,
+                  maxIter: caso.maxIter,
+                }),
+                () => Trazo.newtonRaphson({
+                  f,
+                  derivada: df,
+                  x0: caso.x0,
+                  tolerancia: caso.tolerancia,
+                  maxIter: caso.maxIter,
+                }),
+                () => Trazo.newtonRaphson({
+                  f,
+                  fDerivada: df,
+                  x0: caso.x0,
+                  tolerancia: caso.tolerancia,
+                  maxIter: caso.maxIter,
+                }),
+              ]);
+
+            case 'secante':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.secante({
+                  f,
+                  x0: caso.x0,
+                  x1: caso.x1,
+                  tolerancia: caso.tolerancia,
+                  maxIter: caso.maxIter,
+                }),
+                () => Trazo.secante({
+                  f,
+                  xAnterior: caso.x0,
+                  xActual: caso.x1,
+                  tolerancia: caso.tolerancia,
+                  maxIter: caso.maxIter,
+                }),
+                () => Trazo.secante({
+                  f,
+                  a: caso.x0,
+                  b: caso.x1,
+                  tolerancia: caso.tolerancia,
+                  maxIter: caso.maxIter,
+                }),
+              ]);
+
+            case 'trapecio':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.trapecio(f, caso.a, caso.b, caso.n),
+                () => Trazo.trapecio({ f, a: caso.a, b: caso.b, n: caso.n }),
+              ]);
+
+            case 'simpson13':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.simpson13(f, caso.a, caso.b),
+                () => Trazo.simpson13({ f, a: caso.a, b: caso.b }),
+              ]);
+
+            case 'simpson38':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.simpson38(f, caso.a, caso.b),
+                () => Trazo.simpson38({ f, a: caso.a, b: caso.b }),
+              ]);
+
+            case 'simpsonCompuesto':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.simpsonCompuesto(f, caso.a, caso.b, caso.n),
+                () => Trazo.simpsonCompuesto({ f, a: caso.a, b: caso.b, n: caso.n }),
+              ]);
+
+            case 'lagrange':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.lagrange({ puntos: caso.puntos, x: caso.x }),
+                () => Trazo.lagrange(caso.puntos, caso.x),
+              ]);
+
+            case 'gaussJordan':
+              return Trazo.gaussJordan({
+                A: caso.A,
+                b: caso.vector,
+              });
+
+            case 'det2x2':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.det2x2(caso.A),
+                () => Trazo.det2x2({ A: caso.A }),
+              ]);
+
+            case 'det3x3':
+              return ejecutarConCandidatos(caso.metodo, [
+                () => Trazo.det3x3(caso.A),
+                () => Trazo.det3x3({ A: caso.A }),
+              ]);
+
+            default:
+              throw new Error(`Método no soportado en regresión numérica: ${caso.metodo}`);
+          }
+        }
+
+        const fallos = [];
+
+        for (const caso of casos) {
+          const obtenido = extraerResultado(ejecutarCaso(caso));
+          const diferencia = maxDiferencia(obtenido, caso.esperado);
+
+          if (!Number.isFinite(diferencia) || diferencia > caso.tolerancia) {
+            fallos.push({
+              metodo: caso.metodo,
+              esperado: caso.esperado,
+              obtenido,
+              diferencia,
+              tolerancia: caso.tolerancia,
+            });
+          }
+        }
+
+        if (fallos.length > 0) {
+          console.error('Regresiones numéricas detectadas:');
+          console.error(JSON.stringify(fallos, null, 2));
+          process.exit(1);
+        }
+
+        console.log(`Regresión numérica verificada correctamente en ${casos.length} caso(s).`);
+        NODE

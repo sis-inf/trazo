@@ -47,6 +47,9 @@ jobs:
 
       - name: Run tests
         run: npm test
+            
+      - name: Verificar regresión numérica
+        uses: ./.github/actions/verificar-regresion-numerica
 
   deno:
     name: Deno compatibility
