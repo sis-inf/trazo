@@ -3,6 +3,7 @@
  */
 
 import { ErrorParametros } from "../core/errores.js";
+import { ErrorDivergencia } from "../core/errores.js";
 
 /**
  * Verifica que un valor sea un número finito.
@@ -188,6 +189,33 @@ function validarVector(vector, dimension) {
   }
 }
 
+/**
+ * Verifica que un valor numérico no sea NaN ni Infinity durante la iteración
+ * de un método numérico. Lanza ErrorDivergencia si el valor es no numérico.
+ *
+ * A diferencia de validarNumero (que valida parámetros de entrada),
+ * esta función detecta divergencia numérica durante la ejecución iterativa.
+ *
+ * @param {number} valor - Valor a verificar (ej. resultado de una iteración).
+ * @param {string} metodo - Nombre del método para el mensaje de error.
+ * @param {number} iteracion - Número de iteración donde se detectó el valor.
+ * @throws {ErrorDivergencia} Si el valor es NaN o no finito.
+ *
+ * @example
+ * verificarDivergencia(3.14, "newtonRaphson", 5);  // OK, no lanza nada
+ * verificarDivergencia(NaN, "newtonRaphson", 5);   // lanza ErrorDivergencia
+ * verificarDivergencia(Infinity, "puntoFijo", 10); // lanza ErrorDivergencia
+ */
+function verificarDivergencia(valor, metodo, iteracion) {
+  if (typeof valor !== "number" || Number.isNaN(valor) || !isFinite(valor)) {
+    throw new ErrorDivergencia(
+      `Trazo.${metodo}: divergencia numérica detectada en la iteración ${iteracion}. ` +
+      `El valor calculado es ${valor}, lo cual indica que el método no converge ` +
+      `numéricamente para los parámetros dados.`
+    );
+  }
+}
+
 export {
   validarNumero,
   validarFuncion,
@@ -196,4 +224,5 @@ export {
   validarIntervalo,
   validarMatrizCuadrada,
   validarVector,
+  verificarDivergencia,
 };

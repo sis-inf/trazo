@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Trazo Web Worker</title>
+
+  <style>
+    .caja {
+      animation: mover 1s infinite alternate;
+    }
+
+    @keyframes mover {
+      from {
+        margin-left: 0px;
+      }
+
+      to {
+        margin-left: 100px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Ejemplo de trazo usando Web Worker</h1>
+
+  <p>
+    Este ejemplo ejecuta cálculos en un Web Worker
+    para evitar bloquear la interfaz.
+  </p>
+
+  <div class="caja">
+    La interfaz sigue funcionando
+  </div>
+
+  <button onclick="ejecutar()">
+    Ejecutar cálculo
+  </button>
+
+  <pre id="resultado"></pre>
+
+  <script>
+    const worker = new Worker(
+      './trazo-worker.js',
+      { type: 'module' }
+    );
+
+    worker.onmessage = (evento) => {
+      document.getElementById('resultado').textContent =
+        JSON.stringify(evento.data, null, 2);
+    };
+
+    function ejecutar() {
+      worker.postMessage({
+        metodo: 'biseccion',
+        parametros: {
+          funcion: 'x*x-4',
+          a: 0,
+          b: 5
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

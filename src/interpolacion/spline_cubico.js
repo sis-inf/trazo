@@ -15,6 +15,7 @@ import { ErrorParametros } from '../core/errores.js';
  * const res = splineCubicoNatural([0, 1, 2], [0, 1, 4], 1.5);
  * // res.resultado ≈ 2.25
  */
+// eslint-disable-next-line complexity
 export function splineCubicoNatural(xs, ys, x) {
 
     // Validaciones

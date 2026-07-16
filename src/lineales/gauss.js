@@ -3,6 +3,12 @@ import { ErrorDominio } from '../core/errores.js';
 import { validarMatrizCuadrada } from '../core/validaciones.js';
 
 /**
+ * Umbral relativo para advertir sobre pivotes pequeños que indican
+ * posible inestabilidad numérica.
+ */
+const UMBRAL_PIVOTE_ADVERTENCIA = 1e-10;
+
+/**
  * Resolución de sistemas de ecuaciones lineales Ax = b
  * mediante eliminación gaussiana con sustitución hacia atrás.
  *
@@ -22,6 +28,7 @@ export function gauss({ A, b }) {
 
     const M = A.map((fila, i) => [...fila, b[i]]);
     const iteraciones = [];
+    const warnings = [];
     let contadorIteracion = 1;
 
     const registrarPaso = (paso, descripcion) => {
@@ -39,12 +46,26 @@ export function gauss({ A, b }) {
 
     registrarPaso('eliminacion', 'Estado inicial del sistema aumentado');
 
+    // Calcular la norma infinito de la matriz para el umbral relativo
+    const normaInf = Math.max(...A.map(fila =>
+        fila.reduce((sum, val) => sum + Math.abs(val), 0)
+    ));
+
     for (let col = 0; col < n; col++) {
         const pivote = M[col][col];
 
         if (Math.abs(pivote) < 1e-12) {
             throw new ErrorDominio(
                 `Pivote nulo en la columna ${col + 1}. El sistema no puede resolverse con este método sin pivoteo.`
+            );
+        }
+
+        // Advertir si el pivote es pequeño en relación a la escala de la matriz
+        if (normaInf > 0 && Math.abs(pivote) / normaInf < UMBRAL_PIVOTE_ADVERTENCIA) {
+            warnings.push(
+                `Pivote pequeño detectado en columna ${col + 1} ` +
+                `(|pivote|/||A||∞ = ${(Math.abs(pivote) / normaInf).toExponential(2)}). ` +
+                `Posible inestabilidad numérica en el resultado.`
             );
         }
 
@@ -83,10 +104,13 @@ export function gauss({ A, b }) {
         resultado: x,
         iteraciones,
         convergio: true,
-        mensaje: "El sistema de ecuaciones se resolvió con éxito.",
+        mensaje: warnings.length > 0
+            ? `El sistema se resolvió con ${warnings.length} advertencia(s) de inestabilidad numérica.`
+            : "El sistema de ecuaciones se resolvió con éxito.",
         meta: {
             metodo: "Eliminación Gaussiana",
             parametros: { n }
-        }
+        },
+        warnings,
     });
 }

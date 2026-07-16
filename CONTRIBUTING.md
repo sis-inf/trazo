@@ -106,10 +106,14 @@ npm test
 npm run format:check
 npm run lint
 ```
-Además, instala los hooks de pre-commit si aún no lo hiciste:
+Los hooks de pre-commit se instalan automáticamente al ejecutar:
 ```bash 
-npx pre-commit install
+npm install
 ```
+
+gracias al script `prepare` de npm.
+
+Antes de cada commit, el hook de pre-commit ejecutará automáticamente `eslint --fix` y `prettier --write` sobre los archivos preparados (*staged*). Si encuentra errores que no puedan corregirse automáticamente, el commit se detendrá para que puedas revisarlos.
 ---
 ### 8. Sube tu rama a tu fork
 
@@ -243,4 +247,25 @@ src/utils/               src/helpers/
   ✅ docs/guia-instalacion
   ❌ mi-rama
   ❌ cambios 
+---
 
+## Idioma del proyecto
+
+El **español** es el idioma oficial del proyecto. Tras la consolidación de directorios, todo el contenido nuevo o modificado debe escribirse en español, salvo las palabras reservadas propias del lenguaje de programación.
+
+Esto aplica a:
+- **Nombres de archivos:** Deben estar redactados en español (ej. `metodo_jacobi.py`).
+- **Nombres de funciones y métodos:** En español y de carácter descriptivo (ej. `calcularErrorRelativo()`).
+- **Nombres de variables:** En español, utilizando rigurosamente la convención **camelCase** (ej. `errorTolerancia`, `matrizIdentidad`).
+- **Documentación y comentarios:** Todo comentario dentro del código fuente y guías técnicas en Markdown deben redactarse exclusivamente en español.
+- **Mensajes de error:** En español, garantizando que sean claros y comprensibles para todo el equipo de desarrollo.
+
+### Ejemplos de nomenclatura
+
+| Elemento | ❌ Incorrecto (Inglés / Mezclado) |  Correcto (Español oficial) |
+| :--- | :--- | :--- |
+| **Archivo** | `bisectionMethod.py` | `metodo_biseccion.py` |
+| **Función** | `public void getConvergence()` | `public void obtenerConvergencia()` |
+| **Variable** | `double max_error;` / `int iterCount;` | `double errorMaximo;` / `int contadorIteraciones;` |
+| **Comentario** | `// Check if matrix is diagonally dominant` | `// Verificar si la matriz es diagonalmente dominante` |
+| **Mensaje de Error** | `"Matrix is singular"` | `"Error: La matriz es singular y no tiene solución única"` |

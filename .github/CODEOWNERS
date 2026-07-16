@@ -1,0 +1,22 @@
+# CODEOWNERS - Asignación automática de revisores por módulo
+
+# Métodos de ecuaciones lineales
+src/lineales/ @deviamamani
+
+# Métodos de ecuaciones no lineales
+src/no-lineales/ @deviamamani
+
+# Métodos de integración
+src/integracion/ @deviamamani
+
+# Métodos de interpolación
+src/interpolacion/ @deviamamani
+
+# Métodos de ecuaciones diferenciales ordinarias
+src/edo/ @deviamamani
+
+# Documentación
+docs/ @deviamamani
+
+# Owner por defecto del repositorio
+* @deviamamani

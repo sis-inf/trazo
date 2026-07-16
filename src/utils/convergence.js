@@ -5,7 +5,7 @@
  * @param {number} tol - Tolerancia para considerar convergencia
  * @returns {{ converged: boolean, lastDiff: number }} Objeto con estado de convergencia y última diferencia
  */
-function checkConvergence(xNew, xOld, tol) {
+export function checkConvergence(xNew, xOld, tol) {
     // Calcular la diferencia absoluta
     const lastDiff = Math.abs(xNew - xOld);
     
@@ -23,7 +23,7 @@ function checkConvergence(xNew, xOld, tol) {
  * Clase para mantener historial limitado de valores (últimos 2)
  * Útil para usar en métodos iterativos como Newton y bisección
  */
-class ConvergenceHistory {
+export class ConvergenceHistory {
     constructor() {
         this.values = [];
     }
@@ -78,9 +78,3 @@ class ConvergenceHistory {
         return this.values[this.values.length - 1];
     }
 }
-
-// Exportar las funciones y clases
-module.exports = {
-    checkConvergence,
-    ConvergenceHistory
-};

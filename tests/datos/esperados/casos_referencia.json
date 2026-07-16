@@ -1,0 +1,90 @@
+﻿[
+  {
+    "metodo": "biseccion",
+    "f": "x * x - 2",
+    "a": 1,
+    "b": 2,
+    "tolerancia": 1e-10,
+    "maxIter": 200,
+    "tolerancia": 1e-9, "esperado": 1.4142135623730951
+  },
+  {
+    "metodo": "falsaPosicion",
+    "f": "x * x - 2",
+    "a": 1,
+    "b": 2,
+    "tolerancia": 1e-10,
+    "maxIter": 200,
+    "tolerancia": 1e-9, "esperado": 1.4142135623730951
+  },
+  {
+    "metodo": "newtonRaphson",
+    "f": "x * x - 2",
+    "df": "2 * x",
+    "x0": 1.5,
+    "tolerancia": 1e-10,
+    "maxIter": 100,
+    "tolerancia": 1e-9, "esperado": 1.4142135623730951
+  },
+  {
+    "metodo": "secante",
+    "f": "x * x - 2",
+    "x0": 1,
+    "x1": 2,
+    "tolerancia": 1e-10,
+    "maxIter": 100,
+    "tolerancia": 1e-9, "esperado": 1.4142135623730951
+  },
+  {
+    "metodo": "trapecio",
+    "f": "x",
+    "a": 0,
+    "b": 1,
+    "n": 20,
+    "tolerancia": 1e-9, "esperado": 0.5
+  },
+  {
+    "metodo": "simpson13",
+    "f": "x * x",
+    "a": 0,
+    "b": 1,
+    "tolerancia": 1e-9, "esperado": 0.3333333333333333
+  },
+  {
+    "metodo": "simpson38",
+    "f": "x * x",
+    "a": 0,
+    "b": 1,
+    "tolerancia": 1e-9, "esperado": 0.3333333333333333
+  },
+  {
+    "metodo": "simpsonCompuesto",
+    "f": "x * x",
+    "a": 0,
+    "b": 1,
+    "n": 10,
+    "tolerancia": 1e-9, "esperado": 0.3333333333333333
+  },
+  {
+    "metodo": "lagrange",
+    "puntos": [[0, 1], [1, 3], [2, 7]],
+    "x": 1.5,
+    "tolerancia": 1e-9, "esperado": 4.75
+  },
+  {
+    "metodo": "gaussJordan",
+    "A": [[2, 1, -1], [-3, -1, 2], [-2, 1, 2]],
+    "vector": [8, -11, -3],
+    "tolerancia": 1e-9, "esperado": [2, 3, -1]
+  },
+  {
+    "metodo": "det2x2",
+    "A": [[1, 2], [3, 4]],
+    "tolerancia": 1e-9, "esperado": -2
+  },
+  {
+    "metodo": "det3x3",
+    "A": [[6, 1, 1], [4, -2, 5], [2, 8, 7]],
+    "tolerancia": 1e-9, "esperado": -306
+  }
+]

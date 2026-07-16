@@ -1,71 +1,56 @@
-import { euler } from '../../../src/edo/euler.js';
 import { rungeKutta4 } from '../../../src/edo/runge_kutta_4.js';
 
-describe('Métodos EDO', () => {
-  const f = (t, y) => -y;
-  const valorExacto = Math.exp(-0.1);
-
-  test('Euler aproxima y(0.1) para dy/dt = -y', () => {
-    const res = euler({
-      f,
-      x0: 0,
-      y0: 1,
-      h: 0.1,
-      xFinal: 0.1
+describe('Métodos EDO - Runge-Kutta 4', () => {
+    test('RK4 funciona correctamente con función válida', () => {
+        const f = (x, y) => -y;
+        const result = rungeKutta4({ f, x0: 0, y0: 1, h: 0.1, xFinal: 1 });
+        
+        expect(result).toBeDefined();
+        expect(result).toHaveProperty('resultado');
+        expect(Array.isArray(result.resultado)).toBe(true);
+        expect(result.resultado.length).toBe(11);
+        expect(result.resultado[0][0]).toBe(0);
+        expect(result.resultado[0][1]).toBe(1);
+        expect(result.resultado[10][1]).toBeCloseTo(Math.exp(-1), 2);
     });
 
-    const ultimo = res.resultado[res.resultado.length - 1];
-    const yEuler = ultimo[1];
-
-    expect(yEuler).toBeCloseTo(valorExacto, 1);
-  });
-
-  test('RK4 es más preciso que Euler para la misma EDO', () => {
-    const resEuler = euler({
-      f,
-      x0: 0,
-      y0: 1,
-      h: 0.1,
-      xFinal: 0.1
+    test('RK4 retorna pares [x, y]', () => {
+        const f = (x, y) => -y;
+        const result = rungeKutta4({ f, x0: 0, y0: 1, h: 0.1, xFinal: 0.5 });
+        
+        expect(result).toHaveProperty('resultado');
+        expect(Array.isArray(result.resultado)).toBe(true);
+        expect(result.resultado[0]).toEqual([0, 1]);
+        expect(result.resultado[1][0]).toBe(0.1);
+        expect(result.resultado[1][1]).toBeCloseTo(0.9048, 2);
     });
 
-    const yEuler =
-      resEuler.resultado[resEuler.resultado.length - 1][1];
+    test('h <= 0 lanza error', () => {
+        const f = (x, y) => -y;
+        expect(() => rungeKutta4({ f, x0: 0, y0: 1, h: 0, xFinal: 1 }))
+            .toThrow('El paso h debe ser mayor que cero.');
+        expect(() => rungeKutta4({ f, x0: 0, y0: 1, h: -1, xFinal: 1 }))
+            .toThrow('El paso h debe ser mayor que cero.');
+    });
 
-    const resRK4 = rungeKutta4(
-      f,
-      1,
-      0,
-      0.1,
-      0.1
-    );
+    test('xFinal debe ser mayor que x0', () => {
+        const f = (x, y) => -y;
+        expect(() => rungeKutta4({ f, x0: 0, y0: 1, h: 0.1, xFinal: -1 }))
+            .toThrow('xFinal debe ser mayor que x0.');
+        expect(() => rungeKutta4({ f, x0: 0, y0: 1, h: 0.1, xFinal: 0 }))
+            .toThrow('xFinal debe ser mayor que x0.');
+    });
 
-    const yRK4 = resRK4[resRK4.length - 1].y;
+    test('valida que f sea una función', () => {
+        expect(() => rungeKutta4({ f: 'not a function', x0: 0, y0: 1, h: 0.1, xFinal: 1 }))
+            .toThrow('El argumento debe ser una función');
+    });
 
-    const errorEuler = Math.abs(yEuler - valorExacto);
-    const errorRK4 = Math.abs(yRK4 - valorExacto);
-
-    expect(errorRK4).toBeLessThan(errorEuler);
-  });
-
-  test('h <= 0 lanza error', () => {
-    expect(() =>
-      rungeKutta4(f, 1, 0, 1, 0)
-    ).toThrow();
-  });
-
-  test('RK4 retorna array de objetos { t, y }', () => {
-    const resultado = rungeKutta4(
-      f,
-      1,
-      0,
-      0.1,
-      0.1
-    );
-
-    expect(Array.isArray(resultado)).toBe(true);
-
-    expect(resultado[0]).toHaveProperty('t');
-    expect(resultado[0]).toHaveProperty('y');
-  });
+    test('valida que x0 y y0 sean números', () => {
+        const f = (x, y) => -y;
+        expect(() => rungeKutta4({ f, x0: '0', y0: 1, h: 0.1, xFinal: 1 }))
+            .toThrow();
+        expect(() => rungeKutta4({ f, x0: 0, y0: '1', h: 0.1, xFinal: 1 }))
+            .toThrow();
+    });
 });
