@@ -1260,3 +1260,7 @@ export {
  * Re-exporta el cálculo de matriz inversa mediante Gauss-Jordan.
  */
 export { calcularInversa } from './lineales/inversa.js';
+/**
+ * Re-exporta el método de integración por cuadratura de Gauss-Legendre.
+ */
+export { default as gaussLegendre } from './integracion/gauss_legendre.js';
