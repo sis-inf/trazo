@@ -264,7 +264,7 @@ Esto aplica a:
 
 | Elemento | ❌ Incorrecto (Inglés / Mezclado) |  Correcto (Español oficial) |
 | :--- | :--- | :--- |
-| **Archivo** | `bisectionMethod.py` | `metodo_biseccion.py` |
+| **Archivo** | `bisectionMethod.py` | `src/lineales/jacobi.js` |
 | **Función** | `public void getConvergence()` | `public void obtenerConvergencia()` |
 | **Variable** | `double max_error;` / `int iterCount;` | `double errorMaximo;` / `int contadorIteraciones;` |
 | **Comentario** | `// Check if matrix is diagonally dominant` | `// Verificar si la matriz es diagonalmente dominante` |
