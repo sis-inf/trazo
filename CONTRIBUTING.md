@@ -254,7 +254,7 @@ src/utils/               src/helpers/
 El **español** es el idioma oficial del proyecto. Tras la consolidación de directorios, todo el contenido nuevo o modificado debe escribirse en español, salvo las palabras reservadas propias del lenguaje de programación.
 
 Esto aplica a:
-- **Nombres de archivos:** Deben estar redactados en español (ej. `metodo_jacobi.py`).
+- **Nombres de archivos:** Deben estar redactados en español (ej. `metodo_jacobi.js`).
 - **Nombres de funciones y métodos:** En español y de carácter descriptivo (ej. `calcularErrorRelativo()`).
 - **Nombres de variables:** En español, utilizando rigurosamente la convención **camelCase** (ej. `errorTolerancia`, `matrizIdentidad`).
 - **Documentación y comentarios:** Todo comentario dentro del código fuente y guías técnicas en Markdown deben redactarse exclusivamente en español.
@@ -264,7 +264,7 @@ Esto aplica a:
 
 | Elemento | ❌ Incorrecto (Inglés / Mezclado) |  Correcto (Español oficial) |
 | :--- | :--- | :--- |
-| **Archivo** | `bisectionMethod.py` | `metodo_biseccion.py` |
+| **Archivo** | `bisectionMethod.js` | `metodo_biseccion.js` |
 | **Función** | `public void getConvergence()` | `public void obtenerConvergencia()` |
 | **Variable** | `double max_error;` / `int iterCount;` | `double errorMaximo;` / `int contadorIteraciones;` |
 | **Comentario** | `// Check if matrix is diagonally dominant` | `// Verificar si la matriz es diagonalmente dominante` |
