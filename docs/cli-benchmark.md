@@ -1,5 +1,9 @@
 # CLI Benchmark — Subcomando bench
 
+> ⚠️ **Nota:** El subcomando `bench` **aún no está implementado** en el CLI.
+> Esta documentación describe la funcionalidad planeada pero no disponible actualmente.
+> Ver issue [#908](https://github.com/sis-inf/trazo/issues/908).
+
 Documentacion del subcomando bench para medir el rendimiento de los metodos numericos de trazo.
 
 ## Comando
