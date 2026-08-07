@@ -1,4 +1,3 @@
-@'
 # Métodos implementados
 
 Este documento consolida el estado de los métodos y utilidades numéricas disponibles en el proyecto.
@@ -81,4 +80,3 @@ La tabla reemplaza los documentos separados `metodos.md` y `metodos-implementado
 ## Nota de mantenimiento
 
 Esta tabla debe actualizarse cada vez que se agregue, elimine o reorganice un método público del proyecto. La columna de cobertura debe mantenerse alineada con los tests automatizados disponibles.
-'@ | Set-Content -Encoding UTF8 docs\metodos.md
