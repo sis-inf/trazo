@@ -16,7 +16,11 @@ export default [
     rules: {
       semi: ['error', 'always'],
       'no-unused-vars': 'warn',
-	  complexity: ['error', 15],
+      complexity: ['error', 15],
+      'no-var': 'error',
+      'prefer-const': 'error',
+      'eqeqeq': 'error',
+      'prefer-arrow-callback': 'error',
     },
   },
 ];
