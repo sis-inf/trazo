@@ -164,11 +164,19 @@ Este proyecto usa español como idioma estándar para la estructura de carpetas.
 
 | Directorio | Contenido |
 |---|---|
-| src/lineales/ | Métodos para sistemas de ecuaciones lineales |
-| src/no-lineales/ | Métodos para sistemas de ecuaciones no lineales |
-| src/interpolacion/ | Métodos de interpolación |
-| src/integracion/ | Métodos de integración numérica |
-| src/utils/ | Utilidades y validaciones compartidas |
+| `src/analisis/` | Métodos de análisis numérico y ajuste de datos |
+| `src/cli/` | Interfaz de línea de comandos y herramientas CLI |
+| `src/core/` | Componentes base, contratos, errores y validaciones compartidas |
+| `src/diferencias/` | Métodos de derivación numérica |
+| `src/edo/` | Métodos para ecuaciones diferenciales ordinarias |
+| `src/integracion/` | Métodos de integración numérica |
+| `src/interpolacion/` | Métodos de interpolación |
+| `src/io/` | Exportación y manejo de entrada/salida de datos |
+| `src/lineales/` | Métodos para sistemas de ecuaciones lineales |
+| `src/matricial/` | Operaciones y métodos de álgebra matricial |
+| `src/no-lineales/` | Métodos para sistemas de ecuaciones no lineales |
+| `src/polinomios/` | Métodos y operaciones con polinomios |
+| `src/utils/` | Utilidades y validaciones compartidas |
 
 
 ## Reglas importantes
