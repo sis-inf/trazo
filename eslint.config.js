@@ -1,22 +1,33 @@
+import js from '@eslint/js';
+import globals from 'globals';
+
 export default [
+  js.configs.recommended,
   {
-    files: ['src/**/*.js'],
+    files: ['src/**/*.js', 'tests/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
       globals: {
-        process: 'readonly',
-        console: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        module: 'readonly',
-        require: 'readonly'
+        ...globals.node
       }
     },
     rules: {
       semi: ['error', 'always'],
+      'no-var': 'error',
+      'prefer-const': 'error',
       'no-unused-vars': 'warn',
-	  complexity: ['error', 15],
-    },
+      eqeqeq: 'error',
+      'prefer-arrow-callback': 'error',
+      complexity: ['error', 15]
+    }
   },
+  {
+    files: ['tests/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.jest
+      }
+    }
+  }
 ];
