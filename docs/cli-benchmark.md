@@ -1,5 +1,8 @@
 # CLI Benchmark — Subcomando bench
 
+> [!WARNING]
+> El subcomando `trazo bench` todavía no está implementado ni disponible en el CLI. Este documento conserva la especificación prevista para una futura implementación. Los comandos y ejemplos descritos a continuación no deben considerarse funcionales actualmente.
+
 Documentacion del subcomando bench para medir el rendimiento de los metodos numericos de trazo.
 
 ## Comando
