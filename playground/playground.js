@@ -6,7 +6,7 @@
       id: "biseccion",
       label: "Bisección",
       category: "Ecuaciones no lineales",
-      exports: ["biseccion", "bisection", "metodoBiseccion", "resolverBiseccion"],
+      exports: ["biseccion"],
       description: "Método de intervalo para encontrar una raíz de f(x).",
       fields: [
         { name: "f", label: "f(x)", type: "expression", value: "x^3 - x - 2" },
@@ -20,7 +20,7 @@
       id: "newton",
       label: "Newton-Raphson",
       category: "Ecuaciones no lineales",
-      exports: ["newtonRaphson", "newton", "metodoNewton", "metodoNewtonRaphson"],
+      exports: ["newtonRaphson"],
       description: "Método abierto que usa f(x), su derivada y un valor inicial.",
       fields: [
         { name: "f", label: "f(x)", type: "expression", value: "x^2 - 2" },
@@ -34,7 +34,7 @@
       id: "secante",
       label: "Secante",
       category: "Ecuaciones no lineales",
-      exports: ["secante", "secant", "metodoSecante"],
+      exports: ["secante"],
       description: "Método abierto que aproxima la raíz usando dos valores iniciales.",
       fields: [
         { name: "f", label: "f(x)", type: "expression", value: "x^3 - x - 2" },
@@ -48,7 +48,7 @@
       id: "gauss",
       label: "Eliminación Gaussiana",
       category: "Sistemas lineales",
-      exports: ["gauss", "eliminacionGauss", "gaussiana", "resolverGauss", "metodoGauss"],
+      exports: ["gauss"],
       description: "Resuelve un sistema lineal Ax = b.",
       fields: [
         { name: "matriz", label: "Matriz A", type: "json", wide: true, value: "[[2,1,-1],[-3,-1,2],[-2,1,2]]" },
@@ -59,7 +59,7 @@
       id: "horner",
       label: "Horner",
       category: "Polinomios",
-      exports: ["horner", "metodoHorner", "evaluarHorner", "evaluarPolinomioHorner"],
+      exports: ["evaluarHorner"],
       description: "Evalúa un polinomio en un punto usando el esquema de Horner.",
       fields: [
         { name: "coeficientes", label: "Coeficientes", type: "json", wide: true, value: "[2,-6,2,-1]" },
@@ -70,7 +70,7 @@
       id: "trapecio",
       label: "Regla del Trapecio",
       category: "Integración numérica",
-      exports: ["trapecio", "reglaTrapecio", "integracionTrapecio", "metodoTrapecio"],
+      exports: ["trapecio"],
       description: "Aproxima una integral definida con la regla del trapecio.",
       fields: [
         { name: "f", label: "f(x)", type: "expression", value: "x^2" },
@@ -83,7 +83,7 @@
       id: "eulerMejorado",
       label: "Euler mejorado",
       category: "Ecuaciones diferenciales",
-      exports: ["eulerMejorado", "heun", "metodoEulerMejorado", "eulerModificado"],
+      exports: ["eulerMejorado"],
       description: "Aproxima la solución de una EDO de primer orden y' = f(x, y).",
       fields: [
         { name: "f", label: "f(x, y)", type: "expression", value: "x + y" },
