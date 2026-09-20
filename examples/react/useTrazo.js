@@ -11,7 +11,7 @@ export function useTrazo() {
     setError(null);
 
     try {
-      const respuesta = biseccion(funcion, a, b);
+      const respuesta = biseccion({ f: funcion, a, b });
       setResultado(respuesta);
     } catch (err) {
       setError(err.message);
