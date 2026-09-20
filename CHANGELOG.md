@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## Historial de versiones
+
+Este archivo es la fuente oficial de verdad para las versiones publicadas. Para consultar el contexto del proceso interno y el progreso detallado de cada sprint, consulta el [historial de sprints](docs/historial-sprints/). Esos documentos complementan este changelog, pero no sustituyen el registro de versiones mantenido aquí.
+
 ## [Unreleased]
 
 ### Added
