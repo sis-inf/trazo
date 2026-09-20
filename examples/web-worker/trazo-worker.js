@@ -1,4 +1,4 @@
-import { biseccion } from '../../src/integracion/index.js';
+import { biseccion } from '../../src/no-lineales/biseccion.js';
 
 self.onmessage = (event) => {
   const { metodo, parametros } = event.data;
@@ -9,11 +9,11 @@ self.onmessage = (event) => {
       `return ${parametros.funcion}`
     );
 
-    const resultado = biseccion(
-      funcion,
-      parametros.a,
-      parametros.b
-    );
+    const resultado = biseccion({
+      f: funcion,
+      a: parametros.a,
+      b: parametros.b,
+    });
 
     self.postMessage(resultado);
   }
