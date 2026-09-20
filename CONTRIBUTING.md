@@ -160,6 +160,23 @@ chore: configurar GitHub Actions para CI
 
 Este proyecto usa español como idioma estándar para la estructura de carpetas. Crear directorios con nombres en inglés (como integration, linearAlgebra o math) es un error frecuente que será rechazado en el PR.
 
+### Convención para nombres de archivos en `src/`
+
+Al crear un archivo nuevo dentro de `src/`, usa **kebab-case**: escribe el nombre en minúsculas y separa las palabras con guiones medios (`-`).
+
+Ejemplos:
+
+- ✅ `punto-fijo.js`
+- ✅ `gauss-seidel.js`
+- ❌ `punto_fijo.js`
+- ❌ `gaussSeidel.js`
+
+Antes de agregar un método nuevo, revisa si ya existe una implementación en `src/`. Busca también nombres parecidos o escritos con otra convención. Si el método ya existe, trabaja sobre ese archivo en lugar de crear otro duplicado.
+
+Esta regla se aplica únicamente a los nombres de archivo. Las funciones y los parámetros deben seguir usando **camelCase**, como se explica en `docs/convenciones-nombres-funciones.md`.
+
+No es necesario renombrar los archivos existentes que todavía usan guion bajo; esos casos pueden corregirse por separado.
+
 **Directorios canónicos bajo src/**
 
 | Directorio | Contenido |
