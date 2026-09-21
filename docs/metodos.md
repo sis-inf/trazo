@@ -24,6 +24,7 @@ La tabla reemplaza los documentos separados `metodos.md` y `metodos-implementado
 | `simpsonCompuesto` | Integración | `src/integracion/simpson_compuesto.js` | Variante compuesta del método de Simpson. | Implementado | Pendiente |
 | `romberg` | Integración | `src/integracion/romberg.js` | Integración de Romberg usando extrapolación de Richardson. | Implementado | Sí |
 | `integracionMonteCarlo` | Integración | `src/integracion/monte_carlo.js` | Integración multidimensional por Monte Carlo. | Implementado | Pendiente |
+| `gaussLegendre` | Integración | `src/integracion/gauss_legendre.js` | Cuadratura de Gauss-Legendre para integración numérica. | Implementado | Sí |
 | `lagrange` | Interpolación | `src/interpolacion/lagrange.js` | Interpolación polinómica de Lagrange. | Implementado | Sí |
 | `linearInterpolation` | Interpolación | `src/interpolacion/linear.js` | Interpolación lineal entre puntos. | Implementado | Pendiente |
 | `newtonDD` | Interpolación | `src/interpolacion/newton-dd.js` | Interpolación por diferencias divididas de Newton. | Implementado | Pendiente |
@@ -40,6 +41,7 @@ La tabla reemplaza los documentos separados `metodos.md` y `metodos-implementado
 | `resolverCholesky` | Lineales | `src/lineales/cholesky.js` | Resolución de sistemas usando Cholesky. | Implementado | Pendiente |
 | `det2x2` | Lineales | `src/lineales/determinant.js` | Determinante de matrices 2x2. | Implementado | Pendiente |
 | `det3x3` | Lineales | `src/lineales/determinant.js` | Determinante de matrices 3x3. | Implementado | Pendiente |
+| `calcularInversa` | Lineales | `src/lineales/inversa.js` | Cálculo de la matriz inversa. | Implementado | Pendiente |
 | `determinanteSarrus` | Matricial | `src/matricial/determinante_sarrus.js` | Determinante 3x3 mediante regla de Sarrus. | Implementado | Sí |
 | `rango` | Matricial | `src/matricial/rango.js` | Cálculo del rango de una matriz. | Implementado | Pendiente |
 | `normaEuclideana` | Matricial | `src/matricial/norma_matriz.js` | Norma euclidiana de matriz/vector. | Implementado | Sí |
