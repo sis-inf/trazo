@@ -1,5 +1,5 @@
 import { crearResultado } from '../core/contrato.js';
-import { validarFuncion, validarNumero } from '../core/validaciones.js';
+import { validarFuncion, validarNumero } from '../utils/validaciones.js';
 
 /**
  * Resuelve numéricamente una EDO y' = f(x, y) usando el método de Euler.

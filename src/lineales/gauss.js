@@ -1,6 +1,6 @@
 import { crearResultado } from '../core/contrato.js';
 import { ErrorDominio } from '../core/errores.js';
-import { validarMatrizCuadrada } from '../core/validaciones.js';
+import { validarMatrizCuadrada } from '../utils/validaciones.js';
 
 /**
  * Umbral relativo para advertir sobre pivotes pequeños que indican

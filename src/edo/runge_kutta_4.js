@@ -1,5 +1,5 @@
 import { crearResultado } from '../core/contrato.js';
-import { validarFuncion, validarNumero } from '../core/validaciones.js';
+import { validarFuncion, validarNumero } from '../utils/validaciones.js';
 
 /**
  * Resuelve una EDO de primer orden usando Runge-Kutta de orden 4 (RK4).
