@@ -1,7 +1,7 @@
 import {
   validarNumero,
   validarIntervalo
-} from './src/core/validaciones.js';
+} from './src/utils/validaciones.js';
 
 import { construirResultado } from './src/core/contrato.js';
 

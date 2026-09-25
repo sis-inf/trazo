@@ -1,4 +1,4 @@
-import { validarMatrizCuadrada } from '../core/validaciones.js';
+import { validarMatrizCuadrada } from '../utils/validaciones.js';
 
 /**
  * Calcula el rango de una matriz mediante eliminación gaussiana.
